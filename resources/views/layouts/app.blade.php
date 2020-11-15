@@ -226,15 +226,10 @@
                 </ul>
                 <!-- /.dropdown-alerts -->
             </li>
-            <!-- /.dropdown -->
-            {{-- <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a> --}}
-                {{-- <ul class="dropdown-menu dropdown-user"> --}}
                     @guest
                             <li class="nav-item">
                                 <a class="nav-link"  data-toggle="modal" data-target="#exampleModal" href="{{ route('login') }}">{{ __('Login') }}</a>
+                               
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
@@ -277,32 +272,27 @@
       <div class="modal-content">
         <div class="modal-header">
             <h2 class="modal-title" id="exampleModalLabel">Login</h2>
-            {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button> --}}
           </div>                          
          <div class="modal-body">
-          <div class="card">
-            {{-- <div class="card-header">{{ __('Login') }}</div> --}}                          
+          <div class="card">                         
             <div class="card-body">
             <form method="POST" action="{{ route('login') }}">
              @csrf                    
                 <div class="form-group row">
                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>               
                 <div class="col-md-7">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>                  
-                @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                 @enderror
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>                 
+                
+                
             </div>
-        </div>                          
+        </div>      
+                            
         <div class="form-group row">
             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
                 <div class="col-md-7">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">              
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">             
                     @error('password')
+                    {{-- <script type='text/javascript'>alert('Email atau password salah!');</script> --}}
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -311,6 +301,7 @@
             </div>
         </div>  
         <div class="modal-footer">
+           
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">{{ __('Login') }}</button>
             </div>
@@ -326,6 +317,13 @@
     <main class="py-4">
         @yield('content')
     </main>
-
+    <script type="text/javascript">
+        window.history.forward();
+            function noBack()
+            {
+                  window.history.forward();
+            }
+   </script>
+       <body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 
 
