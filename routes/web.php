@@ -16,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/pegawai', 'PegawaiController@index');
+// Route::get('/admin', 'BlogController@admin');
 
-Route::get('/admin', 'BlogController@admin');
 
+Route::resource('pegawai', 'PegawaiController');
+Route::post('pegawai/emptyAll', 'PegawaiController@emptyAll');
+Route::post('pegawai/restoreAll', 'PegawaiController@restoreAll');
+Route::post('pegawai/restore', 'PegawaiController@restore');
+Route::post('pegawai/forceDelete', 'PegawaiController@forceDelete');
 
-Route::get('/store', 'BlogController@store');
-Route::get('/blog/products', 'BlogController@products');
-Route::get('/blog/kontak', 'BlogController@kontak');
 
 Auth::routes();
 

@@ -307,16 +307,18 @@
             </div>
             </div>
             </div>
+            
       </div>
     </div>
       </div>
       </div>
     </div>
   </div>
+  
 </html>
-    <main class="py-4">
-        @yield('content')
-    </main>
+<main class="py-4">
+    @yield('content')
+</main>
     <script type="text/javascript">
         window.history.forward();
             function noBack()
