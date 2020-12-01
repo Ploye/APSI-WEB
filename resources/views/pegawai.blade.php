@@ -2,23 +2,28 @@
 
 @extends('layouts.nav')
 @section('content')
-
 <div id="page-wrapper">
         
   <div class="row">
-    {{-- <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Pegawai</title>
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    </head>
-    <body> --}}
-        {{-- <div class="container" style="margin-top: 50px"> --}}
-          
-    
+      <div class="col-lg-12">
+          <h1 class="page-header">Dashboarddsds</h1>
+         
+              @error('email')
+              <div class="alert alert-danger" role="alert">
+              {{-- <span class="invalid-feedback" role="alert"> --}}
+                  <strong>{{ $message }}<a class="nav-link"  data-toggle="modal" data-target="#exampleModal" href="{{ route('login') }}"> Login kembali?</a></strong>
+              {{-- </span> --}}
+              .Klik jika anda mau.
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>  
+          </div>
+          @enderror
+              
+            
+      </div>
+      <!-- /.col-lg-12 -->
+  </div>
         <h1>Data Pegawai</h1>
         @if (session('added_success'))
         <div class="alert alert-primary alert-dismissible fade show" role="alert">
