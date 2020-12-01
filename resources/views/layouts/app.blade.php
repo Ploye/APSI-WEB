@@ -35,7 +35,7 @@
             <a class="navbar-brand" href="index.html">SB Admin v2.0</a>
         </div>
         <!-- /.navbar-header -->
-
+        
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -225,7 +225,7 @@
                     </li>
                 </ul>
                 <!-- /.dropdown-alerts -->
-            </li>
+            </li> 
                     @guest
                             <li class="nav-item">
                                 <a class="nav-link"  data-toggle="modal" data-target="#exampleModal" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -259,7 +259,7 @@
                 <!-- /.dropdown-user -->
             </li>
             <!-- /.dropdown -->
-        </ul>
+        {{-- </ul> --}}
         <!-- /.navbar-top-links -->
         
     </div>
