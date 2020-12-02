@@ -468,6 +468,8 @@
                         $('#force-delete-id_pegawai').val(id_pegawai);
             
                       });
+
+                      
                 </script>
 </body>
 </html>

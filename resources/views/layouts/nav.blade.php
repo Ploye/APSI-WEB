@@ -1,4 +1,4 @@
-<div class="navbar-default sidebar" role="navigation">
+<div id="test" class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
                 <div class="input-group custom-search-form">
@@ -7,8 +7,8 @@
                 <a href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-table fa-fw"></i> Data<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
+                <a href="#" ><i class="fa fa-table fa-fw"></i> Data<span class="fa arrow"></span></a>
+                <ul  class="nav nav-second-level">
                     <li>
                         <a href="/pegawai">Pegawai</a>
                     </li>
@@ -95,6 +95,26 @@
     <!-- /.sidebar-collapse -->
 </div>
 
+<script src="admin/vendor/jquery/jquery.min.js"></script>
+@guest
+<script>
+    $(function () {
+        $('#test').children().click(function(){
+          alert('Anda harus login');
+        });
+        function cancel () { return false; };
+        document.getElementById("test").disabled = true;
+        var nodes = document.getElementById("test").getElementsByTagName('*');
+        console.log(nodes);
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].setAttribute('disabled', true);
+            nodes[i].onclick = cancel;
+        }
+        
+    }());
+    </script>
+@endguest
 
 <!-- /.navbar-static-side -->
 </nav>
+
