@@ -74,7 +74,7 @@
                                 </td> --}}
                                 {{-- <td>{{ $dosen->keterangan}}</td> --}}
                                 <td><div class="btn-group" role="group" aria-label="Basic example">
-                                    {{-- <button type="button" class="btn btn-primary" id="btn-edit-pegawai"
+                                     <button type="button" class="btn btn-primary" id="btn-edit-pegawai"
                                      data-toggle="modal" 
                                      data-target="#update"
                                      data-id_pegawai="{{$pegawai->id_pegawai}}"
@@ -84,7 +84,7 @@
                                      data-jabatan="{{$pegawai->jabatan}}"
                                      data-alamat="{{$pegawai->alamat}}"
                                      data-email="{{$pegawai->email}}"
-                                    >Update</button> --}}
+                                    >Ubah</button>
                                     
                                     <button type="button" class="btn btn-danger" id="btn-delete-pegawai"
             
@@ -92,7 +92,7 @@
                                     data-target="#delete"
                                     data-id_pegawai="{{$pegawai->id_pegawai}}"
                                     
-                                    >Delete</button>
+                                    >Hapus</button>
                                   </div></td>
                             </tr>
                         @endforeach
@@ -221,7 +221,7 @@
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
-                      <h2 class="modal-title" id="exampleModalLabel">Update Pegawai</h2>
+                      <h2 class="modal-title" id="exampleModalLabel">Ubah Pegawai</h2>
                     </div>
                     <div class="modal-body">
                     <form method="post" action="{{action('PegawaiController@update', 'update')}}">

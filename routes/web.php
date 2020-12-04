@@ -17,9 +17,22 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/pegawai', 'PegawaiController@index');
+Route::get('/kelolabaju', 'BajuController@index');
 // Route::get('/admin', 'BlogController@admin');
 
+//husen
+// Route::get('/penjualan','BajuController@index');
+// Route::get('/kelolabaju','BajuController@kelolabaju');
+// Route::post('/kelolabaju','BajuController@store');
+// Route::post('/kelolabaju','BajuController@update');
 
+Route::resource('kelolabaju', 'BajuController');
+Route::post('kelolabaju/emptyAll', 'BajuController@emptyAll');
+Route::post('kelolabaju/restoreAll', 'BajuController@restoreAll');
+Route::post('kelolabaju/restore', 'BajuController@restore');
+Route::post('kelolabaju/forceDelete', 'BajuController@forceDelete');
+
+//musa
 Route::resource('pegawai', 'PegawaiController');
 Route::post('pegawai/emptyAll', 'PegawaiController@emptyAll');
 Route::post('pegawai/restoreAll', 'PegawaiController@restoreAll');
