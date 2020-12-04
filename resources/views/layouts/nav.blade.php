@@ -13,12 +13,19 @@
                         <a href="/pegawai">Pegawai</a>
                     </li>
                     <li>
+<<<<<<< HEAD
                         <a href="/absen">Absensi</a>
+=======
+                        <a href="/kelolabaju">Kelola Baju</a>
+                    </li>
+                    <li>
+                        <a href="#">Invoice</a>
+>>>>>>> 3dc87c7f860810f5bdc4cbca45978ecdeb828097
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="tables.html"><i class="fa fa-table fa-fw"></i> naoncoba</a>
+                <a href="tables.html"><i class="fa fa-table fa-fw"></i> Toko</a>
             </li>
             <li>
                 <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
