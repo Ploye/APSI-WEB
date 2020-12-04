@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Pegawai;
-class PegawaiController extends Controller
+use App\Absensi;
+class AbsensiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,9 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawais = Pegawai::all();
+        $absens = Absen::all();
         // $trash = Pegawai::onlyTrashed()->get();
-        return view('pegawai', compact('pegawais'));
+        return view('absen', compact('absens'));
         
     }
 
@@ -35,21 +35,21 @@ class PegawaiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        $pegawai = new Pegawai;
-        $pegawai->id_pegawai = $request->get('id_pegawai');
-        $pegawai->nama = $request->get('nama');
-        $pegawai->jenis_kelamin = $request->get('jenis_kelamin');
-        $pegawai->no_hp = $request->get('no_hp');
-        $pegawai->jabatan = $request->get('jabatan');
-        $pegawai->alamat = $request->get('alamat');
-        $pegawai->email = $request->get('email');
+    // public function store(Request $request)
+    // {
+    //     $absen = new Absen;
+    //     $absen->id_pegawai = $request->get('id_pegawai');
+    //     $absen->nama = $request->get('nama');
+    //     $absen->jenis_kelamin = $request->get('jenis_kelamin');
+    //     $absen->no_hp = $request->get('no_hp');
+    //     $absen->jabatan = $request->get('jabatan');
+    //     $absen->alamat = $request->get('alamat');
+    //     $absen->email = $request->get('email');
 
-        $pegawai->save();
+    //     $absen->save();
 
-        return redirect('pegawai')->with('added_success', 'Data Berhasil ditambahkan');
-    }
+    //     return redirect('absen')->with('added_success', 'Data Berhasil ditambahkan');
+    // }
 
     /**
      * Display the specified resource.
@@ -59,9 +59,9 @@ class PegawaiController extends Controller
      */
     public function show($id)
     {
-        $pegawai = Pegawai::getPegawai($id);
+        $absen = Absen::getAbsen($id);
 
-        return response()->json($pegawai);
+        return response()->json($absen);
     }
 
     /**
@@ -74,6 +74,7 @@ class PegawaiController extends Controller
     {
         //
     }
+}
 
     /**
      * Update the specified resource in storage.
@@ -82,21 +83,21 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $pegawai = Pegawai::where('id_pegawai', $request->get('id_pegawai'))
-        ->update([
-            'nama' => $request->get('nama'),
-            'jenis_kelamin' => $request->get('jenis_kelamin'),
-            'no_hp' => $request->get('no_hp'),
-            'jabatan' => $request->get('jabatan'),
-            'alamat' => $request->get('alamat'),
-            'email' => $request->get('email'),
+    // public function update(Request $request, $id)
+    // {
+    //     $absen = Absen::where('id_absen', $request->get('id_absen'))
+    //     ->update([
+    //         'nama' => $request->get('nama'),
+    //         'jenis_kelamin' => $request->get('jenis_kelamin'),
+    //         'no_hp' => $request->get('no_hp'),
+    //         'jabatan' => $request->get('jabatan'),
+    //         'alamat' => $request->get('alamat'),
+    //         'email' => $request->get('email'),
 
-        ]);
+    //     ]);
 
-        return redirect('pegawai')->with('updated_success', 'Data Berhasil diupdate');
-    }
+    //     return redirect('absen')->with('updated_success', 'Data Berhasil diupdate');
+    // }
 
 
     /**
@@ -105,14 +106,8 @@ class PegawaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
-    {
-        $pegawai = Pegawai::where('id_pegawai', $request->get('id_pegawai'))
-        ->delete();
+//    
 
-        return redirect('pegawai')->with('deleted_success', 'Data berhasil dihapus');
-    }
-}
     // public function emptyAll(){
     //     Pegawai::onlyTrashed()
     //         ->forceDelete();

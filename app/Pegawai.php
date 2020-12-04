@@ -3,10 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 class Pegawai extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
     protected $table = 'pegawai';
     protected $primaryKey = 'id_pegawai';
     public $incrementing = false;

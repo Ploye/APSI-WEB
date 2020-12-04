@@ -17,14 +17,15 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/pegawai', 'PegawaiController@index');
+Route::get('/absen', 'AbsensiController@index');
 // Route::get('/admin', 'BlogController@admin');
 
 
 Route::resource('pegawai', 'PegawaiController');
-Route::post('pegawai/emptyAll', 'PegawaiController@emptyAll');
-Route::post('pegawai/restoreAll', 'PegawaiController@restoreAll');
-Route::post('pegawai/restore', 'PegawaiController@restore');
-Route::post('pegawai/forceDelete', 'PegawaiController@forceDelete');
+// Route::post('pegawai/emptyAll', 'PegawaiController@emptyAll');
+// Route::post('pegawai/restoreAll', 'PegawaiController@restoreAll');
+// Route::post('pegawai/restore', 'PegawaiController@restore');
+// Route::post('pegawai/forceDelete', 'PegawaiController@forceDelete');
 
 
 Auth::routes();

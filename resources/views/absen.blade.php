@@ -7,7 +7,7 @@
         
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Data Pegawai</h1>
+                <h1 class="page-header">Absensi</h1>
                 @if (session('added_success'))
                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
                     {{session('added_success')}}
@@ -42,12 +42,9 @@
                             <td>No</td>
                             <td>ID Pegawai</td>
                             <td>Nama Pegawai</td>
-                            <td>Jenis Kelamin</td>
-                            <td>No HP</td>
                             <td>Jabatan</td>
-                            <td>Alamat</td>
-                            <td>Email</td>
-                            <td>Opsi</td>
+                            <td>Tanggal</td>
+                            <td>Status</td>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -55,16 +52,14 @@
                             $no = 1;   
                         @endphp
             
-                        @foreach ($pegawais as $pegawai)
+                        @foreach ($absens as $absen)
                             <tr>
                                 <td>{{ $no++}}</td>
-                                <td>{{ $pegawai->id_pegawai}}</td>
-                                <td>{{ $pegawai->nama}}</td>
-                                <td>{{ $pegawai->jenis_kelamin}}</td>
-                                <td>{{ $pegawai->no_hp}}</td>
-                                <td>{{ $pegawai->jabatan}}</td>
-                                <td>{{ $pegawai->alamat}}</td>
-                                <td>{{ $pegawai->email}}</td>
+                                <td>{{ $absen->id_pegawai}}</td>
+                                <td>{{ $absen->nama}}</td>
+                                <td>{{ $absen->jabatan}}</td>
+                                <td>{{ $absen->tanggal}}</td>
+                                <td>{{ $absen->status}}</td>
                                 {{-- <td>
                                 @if ($dosen->status == 1)
                                     Aktif

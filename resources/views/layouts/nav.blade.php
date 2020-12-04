@@ -13,7 +13,7 @@
                         <a href="/pegawai">Pegawai</a>
                     </li>
                     <li>
-                        <a href="morris.html">Teing naon</a>
+                        <a href="/absen">Absensi</a>
                     </li>
                 </ul>
             </li>
