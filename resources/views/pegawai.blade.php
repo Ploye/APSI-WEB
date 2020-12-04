@@ -9,7 +9,7 @@
             <div class="col-lg-12">
                 <h1 class="page-header">Data Pegawai</h1>
                 @if (session('added_success'))
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <div class="alert alert-success" role="alert">
                     {{session('added_success')}}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -18,7 +18,7 @@
                   @endif
             
                   @if (session('updated_success'))
-                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <div class="alert alert-success" role="alert">
                       {{session('updated_success')}}
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -26,7 +26,7 @@
                     </div>
                     @endif
                     @if (session('deleted_success'))
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <div class="alert alert-danger" role="alert">
                       {{session('deleted_success')}}
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -472,6 +472,8 @@
 
                       
                 </script>
+
+
 </body>
 </html>
 @endsection

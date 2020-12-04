@@ -4,30 +4,18 @@
 
 @extends('layouts.nav')
 @section('content')
+
 <div id="page-wrapper">
         
   <div class="row">
       <div class="col-lg-12">
-               
-              @error('email')
-              <div class="alert alert-danger" role="alert">
-              {{-- <span class="invalid-feedback" role="alert"> --}}
-                  <strong>{{ $message }}<a class="nav-link"  data-toggle="modal" data-target="#exampleModal" href="{{ route('login') }}"> Login kembali?</a></strong>
-              {{-- </span> --}}
-              .Klik jika anda mau.
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>  
-          </div>
-          @enderror
               
-            
       </div>
       <!-- /.col-lg-12 -->
   </div>
         <h1>Data Baju</h1>
         @if (session('added_success'))
-        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+        <div  class="alert alert-danger" role="alert">
             {{session('added_success')}}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -36,7 +24,7 @@
           @endif
     
           @if (session('updated_success'))
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <div class="alert alert-warning" role="alert">
               {{session('updated_success')}}
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -44,7 +32,7 @@
             </div>
             @endif
             @if (session('deleted_success'))
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <div class="alert alert-danger" role="alert">
               {{session('deleted_success')}}
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -408,7 +396,7 @@
       </div> --}} <!-- sampai sini -->
 
         {{-- JS DOM --}}
-        <script src="{{ asset('js/app.js') }}"></script>
+        {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
         <script>
             $(document).on('click','#btn-edit-baju',function(){
                 let id_baju = $(this).data('id_baju');

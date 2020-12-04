@@ -23,7 +23,7 @@ class CreateBajuTable extends Migration
             $table->bigInteger('harga')->length(20)->unsigned();
             $table->char('stok', 10);
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
         });
     }
 

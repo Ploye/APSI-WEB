@@ -17,11 +17,7 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/pegawai', 'PegawaiController@index');
-<<<<<<< HEAD
-Route::get('/absen', 'AbsensiController@index');
-=======
 Route::get('/kelolabaju', 'BajuController@index');
->>>>>>> 3dc87c7f860810f5bdc4cbca45978ecdeb828097
 // Route::get('/admin', 'BlogController@admin');
 
 //husen

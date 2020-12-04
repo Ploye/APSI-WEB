@@ -132,7 +132,11 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="admin/dist/js/sb-admin-2.js"></script>
-
+<script>
+    $(document).ready(function(){
+                        $(".preloader").fadeOut();
+                           })
+</script>
 </body>
     
 </html>

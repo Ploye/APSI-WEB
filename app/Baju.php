@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Baju extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
     protected $table = 'baju';    
     protected $primaryKey = 'id_baju';
     public $incrementing = false;

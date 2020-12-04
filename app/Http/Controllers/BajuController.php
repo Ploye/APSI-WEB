@@ -10,8 +10,8 @@ class BajuController extends Controller
     public function index()
 	{
 		$baju = Baju::all();
-        $trash = Baju::onlyTrashed()->get();
-        return view('kelolabaju', compact('baju','trash'));
+        // $trash = Baju::onlyTrashed()->get();
+        return view('kelolabaju', compact('baju'));
 	}
 
     // public function kelolabaju()
@@ -103,29 +103,29 @@ class BajuController extends Controller
 
         return redirect('kelolabaju')->with('deleted_success', 'Data berhasil dihapus');
     }
-    public function emptyAll(){
-        Baju::onlyTrashed()
-            ->forceDelete();
-        return redirect('kelolabaju')->with('empty_success', 'Semua Data berhasil dihapus');
-    }
+    // public function emptyAll(){
+    //     Baju::onlyTrashed()
+    //         ->forceDelete();
+    //     return redirect('kelolabaju')->with('empty_success', 'Semua Data berhasil dihapus');
+    // }
 
-    public function restoreAll(){
-        Baju::onlyTrashed()
-            ->restore();
-         return redirect('kelolabaju')->with('restore_all_success', 'Semua Data berhasil dikembalikan');
-    }
+    // public function restoreAll(){
+    //     Baju::onlyTrashed()
+    //         ->restore();
+    //      return redirect('kelolabaju')->with('restore_all_success', 'Semua Data berhasil dikembalikan');
+    // }
     
-    public function restore(Request $request){
-        Baju::onlyTrashed()
-            ->where('id_baju', $request->get('id_baju'))
-            ->restore();
-        return redirect('kelolabaju')->with('force_delete_success', 'Data berhasil dikembalikan');
-    }
+    // public function restore(Request $request){
+    //     Baju::onlyTrashed()
+    //         ->where('id_baju', $request->get('id_baju'))
+    //         ->restore();
+    //     return redirect('kelolabaju')->with('force_delete_success', 'Data berhasil dikembalikan');
+    // }
 
-    public function forceDelete(Request $request){
-        Baju::onlyTrashed()
-        ->where('id_baju', $request->get('id_baju'))
-        ->forceDelete();
-    return redirect('kelolabaju')->with('force_delete_success', 'Data berhasil dikembalikan');
-    }
+    // public function forceDelete(Request $request){
+    //     Baju::onlyTrashed()
+    //     ->where('id_baju', $request->get('id_baju'))
+    //     ->forceDelete();
+    // return redirect('kelolabaju')->with('force_delete_success', 'Data berhasil dikembalikan');
+    // }
 }

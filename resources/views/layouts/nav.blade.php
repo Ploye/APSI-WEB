@@ -1,3 +1,29 @@
+<style type="text/css">
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background-color: #fff;
+    }
+    .preloader .loading {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      font: 14px arial;
+    }
+    </style>
+  
+  <div class="preloader">
+    <div class="loading">
+      <img src="admin/loading.gif" width="300">
+      
+    </div>
+  </div>
+ 
 <div id="test" class="navbar-default sidebar" role="navigation">
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
@@ -13,14 +39,11 @@
                         <a href="/pegawai">Pegawai</a>
                     </li>
                     <li>
-<<<<<<< HEAD
                         <a href="/absen">Absensi</a>
-=======
                         <a href="/kelolabaju">Kelola Baju</a>
                     </li>
                     <li>
                         <a href="#">Invoice</a>
->>>>>>> 3dc87c7f860810f5bdc4cbca45978ecdeb828097
                     </li>
                 </ul>
             </li>
@@ -101,13 +124,33 @@
     </div>
     <!-- /.sidebar-collapse -->
 </div>
-
+<div  class="modal fade" id="tes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 <script src="admin/vendor/jquery/jquery.min.js"></script>
 @guest
 <script>
+   
     $(function () {
         $('#test').children().click(function(){
           alert('Anda harus login');
+        //    document.getElementById("tes");
         });
         function cancel () { return false; };
         document.getElementById("test").disabled = true;
@@ -121,7 +164,11 @@
     }());
     </script>
 @endguest
-
+<script>
+    $(document).ready(function(){
+                        $(".preloader").fadeOut();
+                           })
+</script>
 <!-- /.navbar-static-side -->
 </nav>
 
