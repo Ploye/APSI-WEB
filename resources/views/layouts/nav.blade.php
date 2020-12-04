@@ -13,12 +13,15 @@
                         <a href="/pegawai">Pegawai</a>
                     </li>
                     <li>
-                        <a href="morris.html">Teing naon</a>
+                        <a href="/kelolabaju">Kelola Baju</a>
+                    </li>
+                    <li>
+                        <a href="#">Invoice</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="tables.html"><i class="fa fa-table fa-fw"></i> naoncoba</a>
+                <a href="tables.html"><i class="fa fa-table fa-fw"></i> Toko</a>
             </li>
             <li>
                 <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
