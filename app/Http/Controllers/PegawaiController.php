@@ -13,11 +13,52 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawais = Pegawai::all();
+        $pegawais = Pegawai::paginate(2);
         // $trash = Pegawai::onlyTrashed()->get();
         return view('pegawai', compact('pegawais'));
         
     }
+    // public function cari(Request $request)
+	// {
+    //     $nama = $request->nama;
+    //     $pegawais = Pegawai::where('nama','like',"%".$nama."%")->paginate(2);
+    //     return view('pegawai',compact('pegawais'));
+ 
+    // }
+    public function search(Request $request)
+{
+if($request->ajax())
+{
+$output="";
+$pegawais=Pegawai::where('nama','LIKE','%'.$request->search."%")->get();
+if($pegawais)
+{
+    $no=1;
+foreach ($pegawais as $key => $pegawai) {
+$output.='<tr>'.
+'<td>'.$no++.'</td>'.
+'<td>'.$pegawai->id_pegawai.'</td>'.
+'<td>'.$pegawai->nama.'</td>'.
+'<td>'.$pegawai->jenis_kelamin.'</td>'.
+'<td>'.$pegawai->no_hp.'</td>'.
+'<td>'.$pegawai->jabatan.'</td>'.
+'<td>'.$pegawai->alamat.'</td>'.
+'<td>'.$pegawai->email.'</td>'.
+'<td>
+<div>
+<button type="button" class="btn btn-danger" id="btn-delete-pegawai"
+
+data-toggle="modal" 
+data-target="#delete"
+data-id_pegawai='.$pegawai->id_pegawai.'>Hapus</button>
+</div></td>'.
+'</tr>';
+}
+
+return Response($output);
+   }
+   }
+}
 
     /**
      * Show the form for creating a new resource.

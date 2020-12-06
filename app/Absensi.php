@@ -10,4 +10,20 @@ class Absensi extends Model
     protected $primaryKey = 'id_absen';
     public $incrementing = false;
     protected $keyType = 'char';
+
+    protected $fillable = [
+        'id_absen',
+        'nama',
+        'jabatan',
+        'tanggal',
+        'status',
+        'alamat',
+        'email'
+
+    ];
+
+    public function pegawai()
+    {
+        return $this->belongsTo(Pegawai::class,'id_pegawai','id_pegawai');
+    }
 }

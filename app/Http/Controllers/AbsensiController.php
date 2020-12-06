@@ -13,7 +13,7 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        $absens = Absen::all();
+        $absens = Absensi::all();
         // $trash = Pegawai::onlyTrashed()->get();
         return view('absen', compact('absens'));
         
