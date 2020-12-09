@@ -8,34 +8,33 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Absensi</h1>
-                {{-- @if (session('added_success'))
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    {{session('added_success')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+
+                <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h2 class="modal-title" id="exampleModalLabel">Hadir</h2>
+                      </div>
+                      <div class="modal-body">
+                      <form method="post" action="{{action('AbsensiController@update', 'update')}}">
+                          @method('PATCH')
+                          @csrf
+                              <div class="form-group">
+                                <label>ID Absen</label>
+                                <input type="text" name="id_absen" class="form-control" id="edit-id_absen" readonly>
+                              </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning">Update</button>
+                      </form>
+                      </div>
+                    </div>
                   </div>
-                  @endif
-            
-                  @if (session('updated_success'))
-                  <div class="alert alert-success " role="alert">
-                      {{session('updated_success')}}
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    @endif
-                    @if (session('deleted_success'))
-                  <div class="alert alert-danger " role="alert">
-                      {{session('deleted_success')}}
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    @endif --}}
-                <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Data</button>
-                <br>
-                <br>
+                </div>
                 <table class="table table-bordered">
                     <thead  class="text-center">
                         <tr>
@@ -60,16 +59,27 @@
                                 <td>{{ $absen->pegawai->jabatan}}</td>
                                 <td>{{ $absen->tanggal}}</td>
                                 {{-- <td>{{ $absen->status}}</td> --}}
-                                <td><div class="btn-group" role="group" aria-label="Basic example">
+                                @if ($absen->status == '1')
+                                <td>
                                   
-                                    <button type="button" class="btn btn-danger" id="btn-delete-pegawai"
-            
-                                    {{-- data-toggle="modal" 
-                                    data-target="#delete"
-                                    data-id_pegawai="{{$pegawai->id_pegawai}}" --}}
-                                    
-                                    >Hadir</button>
-                                  </div></td>
+                                  <button type="button" class="btn btn-primary" id="btn-edit-absen"
+                             data-toggle="modal" 
+                             data-target="#update"
+                             data-id_absen="{{$absen->id_absen}}"
+                             
+                            >Hadir</button>
+                                </td>
+                                @else
+                                <td>
+                                  <button type="button" class="btn btn-danger" id="btn-edit-absen"
+                             data-toggle="modal" 
+                             data-target="#update"
+                             data-id_absen="{{$absen->id_absen}}"
+                            
+                            >Tidak Hadir</button>
+                                </td>
+                                @endif
+                                
                             </tr>
                         @endforeach
                       
@@ -92,67 +102,37 @@
 <!-- Custom Theme JavaScript -->
 <script src="admin/dist/js/sb-admin-2.js"></script>
 {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
-                <script>
-                    $(document).on('click','#btn-edit-pegawai',function(){
-                        let id_pegawai = $(this).data('id_pegawai');
-                        // let nama = $(this).data('nama');
-                        // let keterangan = $(this).data('keterangan');
-                        // let status = $(this).data('status');
-            
-                        // $('#edit-nidn').val(nidn);
-                        // $('#edit-nama').val(nama);
-                        // $('#edit-keterangan').text(keterangan);
-                        
-                        // $('#edit-status option').filter(function(){
-                        //     return ($(this).val()== status);
-                        // }).prop('selected', true);
-            
-                          // AJAX 
-                        $.ajax({
-                          type: "get",
-                          url: 'pegawai/'+id_pegawai,
-                          dataType: 'json',
-                          success: function(res){
-                              // console.log(res);
-            
-                               $('#edit-id_pegawai').val(res[0].id_pegawai);
-                               $('#edit-nama').val(res[0].nama);
-                              //  $('#edit-keterangan').text(res[0].keterangan);
-                              $('#edit-jenis_kelamin').val(res[0].jenis_kelamin);
-                              $('#edit-no_hp').val(res[0].no_hp);
-                              $('#edit-jabatan').val(res[0].jabatan);
-                              $('#edit-alamat').val(res[0].alamat);
-                              $('#edit-email').val(res[0].email);
-                        
-                              //  $('#edit-status option').filter(function(){
-                              //      return ($(this).val()== res[0].status);
-                              //  }).prop('selected', true);
-                          }
-                        });
-            
-                        
-                    });
-            
-                    $(document).on('click','#btn-delete-pegawai',function(){
-                        let id_pegawai = $(this).data('id_pegawai');
-                        $('#delete-id_pegawai').val(id_pegawai);
-            
-                      }); 
-            
-                      $(document).on('click','#btn-restore-pegawai',function(){
-                        let id_pegawai = $(this).data('id_pegawai');
-                        $('#restore-id_pegawai').val(id_pegawai);
-            
-                      });
-            
-                      $(document).on('click','#btn-force-delete-pegawai',function(){
-                        let id_pegawai = $(this).data('id_pegawai');
-                        $('#force-delete-id_pegawai').val(id_pegawai);
-            
-                      });
+<script>
+  $(document).on('click','#btn-edit-absen',function(){
+      let id_absen = $(this).data('id_absen');
+     
+        // AJAX 
+      $.ajax({
+        type: "get",
+        url: 'absen/'+id_absen,
+        dataType: 'json',
+        success: function(res){
+            // console.log(res);
 
-                      
-                </script>
+             $('#edit-id_absen').val(res[0].id_absen);
+            //  $('#edit-nama').val(res[0].nama);
+            // //  $('#edit-keterangan').text(res[0].keterangan);
+            // $('#edit-jenis_kelamin').val(res[0].jenis_kelamin);
+            // $('#edit-no_hp').val(res[0].no_hp);
+            // $('#edit-jabatan').val(res[0].jabatan);
+            // $('#edit-alamat').val(res[0].alamat);
+            // $('#edit-email').val(res[0].email);
+      
+            //  $('#edit-status option').filter(function(){
+            //      return ($(this).val()== res[0].status);
+            //  }).prop('selected', true);
+        }
+      });
+
+      
+  });
+  
+</script>
 </body>
 </html>
 @endsection

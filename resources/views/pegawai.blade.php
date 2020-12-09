@@ -33,16 +33,67 @@
                       </button>
                     </div>
                     @endif
-                  <form class="form-inline ">
-                    <div class="form-group mx-sm-3 mb-2 ">
-                      <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Data</button>
-                    </div>
-                    <input type="text" class="form-control" id="search" name="search" placeholder="Cari"></input>
-                  </form>
-               
+                  
+              
             </div>
         </div>
-  
+         <!-- Modal UPDATE-->
+         <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title" id="exampleModalLabel">Update Pegawai</h2>
+              </div>
+              <div class="modal-body">
+              <form method="post" action="{{action('PegawaiController@update', 'update')}}">
+                  @method('PATCH')
+                  @csrf
+                      <div class="form-group">
+                        <label>ID Pegawai</label>
+                        <input type="text" name="id_pegawai" class="form-control" id="edit-id_pegawai" readonly>
+                      </div>
+                      <div class="form-group">
+                      <label>Nama</label>
+                        <input type="text" name="nama" class="form-control" id="edit-nama">
+                      </div>
+                      <div class="form-group">
+                      <label>Jenis Kelamin</label>
+                      <textarea class="form-control" name="jenis_kelamin" id="edit-jenis_kelamin"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>No HP</label>
+                      <textarea class="form-control" name="no_hp" id="edit-no_hp"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Jabatan</label>
+                      <textarea class="form-control" name="jabatan" id="edit-jabatan"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Alamat</label>
+                      <textarea class="form-control" name="alamat" id="edit-alamat"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Email</label>
+                      <textarea class="form-control" name="email" id="edit-email"></textarea>
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-warning">Update</button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Data</button>
+        <form class="form-inline "><br>
+          <div class="form-group mx-sm-3 mb-2 ">
+            <input type="text" class="form-control" id="search" name="search" placeholder="Cari"></input>
+          </div>
+        </form>
 
                   <table class="table table-bordered text-center">
                   <thead>
@@ -76,7 +127,7 @@
                         <td>{{ $pegawai->email}}</td>
                       
                         <td><div class="btn-group" role="group" aria-label="Basic example">
-                             {{-- <button type="button" class="btn btn-primary" id="btn-edit-pegawai"
+                             <button type="button" class="btn btn-primary" id="btn-edit-pegawai"
                              data-toggle="modal" 
                              data-target="#update"
                              data-id_pegawai="{{$pegawai->id_pegawai}}"
@@ -87,7 +138,7 @@
                              data-alamat="{{$pegawai->alamat}}"
                              data-email="{{$pegawai->email}}"
                             >Ubah</button>
-                             --}}
+                            
                             <button type="button" class="btn btn-danger" id="btn-delete-pegawai"
     
                             data-toggle="modal" 
@@ -248,17 +299,17 @@
             
                       }); 
             
-                      $(document).on('click','#btn-restore-pegawai',function(){
-                        let id_pegawai = $(this).data('id_pegawai');
-                        $('#restore-id_pegawai').val(id_pegawai);
+                    //   $(document).on('click','#btn-restore-pegawai',function(){
+                    //     let id_pegawai = $(this).data('id_pegawai');
+                    //     $('#restore-id_pegawai').val(id_pegawai);
             
-                      });
+                    //   });
             
-                      $(document).on('click','#btn-force-delete-pegawai',function(){
-                        let id_pegawai = $(this).data('id_pegawai');
-                        $('#force-delete-id_pegawai').val(id_pegawai);
+                    //   $(document).on('click','#btn-force-delete-pegawai',function(){
+                    //     let id_pegawai = $(this).data('id_pegawai');
+                    //     $('#force-delete-id_pegawai').val(id_pegawai);
             
-                      });
+                    //   });
 
                       
                 </script>

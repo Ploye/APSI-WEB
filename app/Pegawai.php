@@ -28,7 +28,7 @@ class Pegawai extends Model
     
     public function absensi()
     {
-        return $this->hasMany(Absensi::class);
+        return $this->hasOne(Absensi::class);
     }
 //Untuk Ajax
     public static function getPegawai($id_pegawai){

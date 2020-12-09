@@ -74,7 +74,7 @@ class AbsensiController extends Controller
     {
         //
     }
-}
+
 
     /**
      * Update the specified resource in storage.
@@ -83,21 +83,22 @@ class AbsensiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, $id)
-    // {
-    //     $absen = Absen::where('id_absen', $request->get('id_absen'))
-    //     ->update([
-    //         'nama' => $request->get('nama'),
-    //         'jenis_kelamin' => $request->get('jenis_kelamin'),
-    //         'no_hp' => $request->get('no_hp'),
-    //         'jabatan' => $request->get('jabatan'),
-    //         'alamat' => $request->get('alamat'),
-    //         'email' => $request->get('email'),
+     public function update(Request $request, $id)
+    {
+        $absen = Pegawai::where('id_absen', $request->get('id_absen'))
+        ->update([
+            'nama' => $request->get('nama'),
+            'jenis_kelamin' => $request->get('jenis_kelamin'),
+            'no_hp' => $request->get('no_hp'),
+            'jabatan' => $request->get('jabatan'),
+            'alamat' => $request->get('alamat'),
+            'email' => $request->get('email'),
 
-    //     ]);
+        ]);
 
-    //     return redirect('absen')->with('updated_success', 'Data Berhasil diupdate');
-    // }
+        return redirect('absen')->with('updated_success', 'Data Berhasil diupdate');
+    }
+}
 
 
     /**
@@ -108,29 +109,3 @@ class AbsensiController extends Controller
      */
 //    
 
-    // public function emptyAll(){
-    //     Pegawai::onlyTrashed()
-    //         ->forceDelete();
-    //     return redirect('pegawai')->with('empty_success', 'Semua Data berhasil dihapus');
-    // }
-
-    // public function restoreAll(){
-    //     Pegawai::onlyTrashed()
-    //         ->restore();
-    //      return redirect('pegawai')->with('restore_all_success', 'Semua Data berhasil dikembalikan');
-    // }
-    
-//     public function restore(Request $request){
-//         Pegawai::onlyTrashed()
-//             ->where('id_pegawai', $request->get('id_pegawai'))
-//             ->restore();
-//         return redirect('pegawai')->with('force_delete_success', 'Data berhasil dikembalikan');
-//     }
-
-//     public function forceDelete(Request $request){
-//         Pegawai::onlyTrashed()
-//         ->where('id_pegawai', $request->get('id_pegawai'))
-//         ->forceDelete();
-//     return redirect('pegawai')->with('force_delete_success', 'Data berhasil dikembalikan');
-//     }
-// } 

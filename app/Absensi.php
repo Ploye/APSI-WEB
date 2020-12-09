@@ -21,9 +21,15 @@ class Absensi extends Model
         'email'
 
     ];
-
+    //relasi
     public function pegawai()
     {
         return $this->belongsTo(Pegawai::class,'id_pegawai','id_pegawai');
+    }
+    public static function getAbsen($id_absen){
+
+        $absen = Absen::where('id_absen',$id_absen)->get();
+        return $absen;
+
     }
 }

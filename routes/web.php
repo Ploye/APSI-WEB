@@ -20,6 +20,7 @@ Route::get('/pegawai', 'PegawaiController@index');
 Route::get('search','PegawaiController@search');
 Route::get('/kelolabaju', 'BajuController@index');
 Route::get('/absen', 'AbsensiController@index');
+
 // Route::get('/admin', 'BlogController@admin');
 
 //husen
@@ -36,6 +37,7 @@ Route::post('kelolabaju/forceDelete', 'BajuController@forceDelete');
 
 //musa
 Route::resource('pegawai', 'PegawaiController');
+Route::resource('absen', 'AbsensiController');
 // Route::post('pegawai/emptyAll', 'PegawaiController@emptyAll');
 // Route::post('pegawai/restoreAll', 'PegawaiController@restoreAll');
 // Route::post('pegawai/restore', 'PegawaiController@restore');
