@@ -26,6 +26,7 @@ class CreateAbsenTable extends Migration
             ->references('id_pegawai')
             ->on('pegawai')
             ->onUpdate('cascade');
+          
 
             
         });

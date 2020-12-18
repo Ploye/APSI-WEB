@@ -1,8 +1,6 @@
 @extends('layouts.app')
-
 @extends('layouts.nav')
 @section('content')
-
     <div id="page-wrapper">
       <meta name="_token" content="{{ csrf_token() }}">
         <div class="row">
@@ -168,11 +166,12 @@
                    <h2 class="modal-title" id="exampleModalLabel">Tambah Pegawai</h2>
                   </div>
                   <div class="modal-body">
+                
                   <form method="post" action="{{action('PegawaiController@store')}}">
                       @csrf
                           <div class="form-group">
                             <label>ID Pegawai</label>
-                            <input type="text" name="id_pegawai" class="form-control" required>
+                          <input type="text" name="id_pegawai" class="form-control">
                           </div>
                           <div class="form-group">
                           <label>Nama</label>
@@ -259,7 +258,7 @@
                         // let keterangan = $(this).data('keterangan');
                         // let status = $(this).data('status');
             
-                        // $('#edit-nidn').val(nidn);
+                        // $('#edit-id_pegawai').val(id_pegawai);
                         // $('#edit-nama').val(nama);
                         // $('#edit-keterangan').text(keterangan);
                         

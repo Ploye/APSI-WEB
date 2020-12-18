@@ -3,11 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Absensi extends Model
+use Illuminate\Support\Carbon;
+class Absen extends Model
 {
     protected $table = 'absen';
-    protected $primaryKey = 'id_absen';
+    protected $primaryKey = 'id';
     public $incrementing = false;
     protected $keyType = 'char';
 
@@ -21,14 +21,24 @@ class Absensi extends Model
         'email'
 
     ];
+    public function getUpdatedAt()
+    {
+        return Carbon::parse($this->attributes['updated_at'])
+            ->translatedFormat('l, d F Y');
+    }
     //relasi
     public function pegawai()
     {
         return $this->belongsTo(Pegawai::class,'id_pegawai','id_pegawai');
     }
-    public static function getAbsen($id_absen){
 
-        $absen = Absen::where('id_absen',$id_absen)->get();
+    // public function penggajian()
+    // {
+    //     return $this->belongsTo(Penggajian::class,'id_pegawai','id_pegawai');
+    // }
+    public static function getAbsen($id){
+
+        $absen = Absensi::where('id',$id)->get();
         return $absen;
 
     }

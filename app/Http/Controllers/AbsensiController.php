@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Absensi;
+use App\Absen;
 class AbsensiController extends Controller
 {
     /**
@@ -13,10 +13,20 @@ class AbsensiController extends Controller
      */
     public function index()
     {
-        $absens = Absensi::all();
+        $absens = Absen::all();
         // $trash = Pegawai::onlyTrashed()->get();
         return view('absen', compact('absens'));
         
+    }
+
+    public function changeStatus(Request $request)
+    {
+        $absen = Absen::find($request->id);
+        $absen->status = $request->status;
+
+        $absen->save();
+  
+        return response()->json(['success'=>'Status change successfully.']);
     }
 
     /**
@@ -85,14 +95,11 @@ class AbsensiController extends Controller
      */
      public function update(Request $request, $id)
     {
-        $absen = Pegawai::where('id_absen', $request->get('id_absen'))
+       
+        $absen = Absen::where('id', $request->get('id'))
         ->update([
-            'nama' => $request->get('nama'),
-            'jenis_kelamin' => $request->get('jenis_kelamin'),
-            'no_hp' => $request->get('no_hp'),
-            'jabatan' => $request->get('jabatan'),
-            'alamat' => $request->get('alamat'),
-            'email' => $request->get('email'),
+            'status' => $request->get('status'),
+            
 
         ]);
 

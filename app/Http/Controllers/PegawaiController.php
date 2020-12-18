@@ -13,7 +13,12 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $pegawais = Pegawai::paginate(2);
+        $pegawais = Pegawai::all();
+        // $lastID = pegawai::getLastID();
+        // return view('pegawai.DataPendonor',["user"=>$user],[
+        //     "datadonor" =>$datadonor, 
+        //     "lastID" => $lastID
+        //     ]);
         // $trash = Pegawai::onlyTrashed()->get();
         return view('pegawai', compact('pegawais'));
         
@@ -154,29 +159,4 @@ return Response($output);
         return redirect('pegawai')->with('deleted_success', 'Data berhasil dihapus');
     }
 }
-    // public function emptyAll(){
-    //     Pegawai::onlyTrashed()
-    //         ->forceDelete();
-    //     return redirect('pegawai')->with('empty_success', 'Semua Data berhasil dihapus');
-    // }
-
-    // public function restoreAll(){
-    //     Pegawai::onlyTrashed()
-    //         ->restore();
-    //      return redirect('pegawai')->with('restore_all_success', 'Semua Data berhasil dikembalikan');
-    // }
-    
-//     public function restore(Request $request){
-//         Pegawai::onlyTrashed()
-//             ->where('id_pegawai', $request->get('id_pegawai'))
-//             ->restore();
-//         return redirect('pegawai')->with('force_delete_success', 'Data berhasil dikembalikan');
-//     }
-
-//     public function forceDelete(Request $request){
-//         Pegawai::onlyTrashed()
-//         ->where('id_pegawai', $request->get('id_pegawai'))
-//         ->forceDelete();
-//     return redirect('pegawai')->with('force_delete_success', 'Data berhasil dikembalikan');
-//     }
-// } 
+ 
