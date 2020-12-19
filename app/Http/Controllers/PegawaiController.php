@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Pegawai;
 use App\Absen;
 use App\Penggajian;
+use Illuminate\Support\Carbon;
 class PegawaiController extends Controller
 {
     /**
@@ -85,6 +86,7 @@ return Response($output);
      */
     public function store(Request $request)
     {
+        
         $pegawai = new Pegawai;
         $penggajian = new Penggajian;
         $pegawai->id_pegawai = $request->get('id_pegawai');
@@ -97,17 +99,24 @@ return Response($output);
         $penggajian->nama = $request->get('nama');
         $penggajian->jabatan = $request->get('jabatan');
         $pegawai->save();
-
+        
+       
         $absen = new Absen;
         $absen->id_pegawai = $request->get('id_pegawai');
         $absen->status = '0';
         $absen->save();
 
-       
+        $gaji='40000';
+        
+        
+        $absen ='30';
+        $tidak_absen ='5';
+        $total_absen =  $absen - $tidak_absen;
+        $gaji_di_termia = $gaji * $total_absen;
         $penggajian->id_pegawai = $request->get('id_pegawai');
-        $penggajian->gaji_pokok = null;
-        $penggajian->jml_tidak_hadir = null;
-        $penggajian->gaji_diterima = null;
+        $penggajian->gaji_pokok = $gaji;
+        $penggajian->jml_tidak_hadir = $tidak_absen;
+        $penggajian->gaji_diterima = $gaji_di_termia;
         $penggajian->absen_id= null;
         
         $penggajian->save();

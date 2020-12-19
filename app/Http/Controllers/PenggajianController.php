@@ -14,8 +14,10 @@ class PenggajianController extends Controller
     public function index()
     {
         $penggajians = Penggajian::all();
+        
         // $trash = Pegawai::onlyTrashed()->get();
         return view('penggajian', compact('penggajians'));
+        
     }
 
     /**
@@ -47,11 +49,16 @@ class PenggajianController extends Controller
      */
     public function show($id)
     {
+        
         $penggajian = Penggajian::getPenggajian($id);
-
+        
         return response()->json($penggajian);
+        
+       
+        
     }
 
+   
     /**
      * Show the form for editing the specified resource.
      *

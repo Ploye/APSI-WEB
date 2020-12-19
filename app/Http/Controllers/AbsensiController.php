@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Absen;
+use Illuminate\Support\Carbon;
+use Illuminate\Console\Scheduling\Schedule;
 class AbsensiController extends Controller
 {
     /**
@@ -11,11 +13,18 @@ class AbsensiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
     public function index()
     {
+   
         $absens = Absen::all();
-        // $trash = Pegawai::onlyTrashed()->get();
+        // Absen::where('status', '=', 1)->update(array('status' => 0));
+        // Absen::where('status', '>', Carbon::now())->delete();
+        
+        
+        // Absen::where('status', '=', 1)->update(array('status' => 0));
         return view('absen', compact('absens'));
+        
         
     }
 
@@ -25,8 +34,10 @@ class AbsensiController extends Controller
         $absen->status = $request->status;
 
         $absen->save();
-  
+        
+        
         return response()->json(['success'=>'Status change successfully.']);
+        
     }
 
     /**
@@ -70,7 +81,8 @@ class AbsensiController extends Controller
     public function show($id)
     {
         $absen = Absen::getAbsen($id);
-
+        // Absen::where('status', '<', Carbon::now()->subHours(24))->delete();
+        
         return response()->json($absen);
     }
 
@@ -102,7 +114,7 @@ class AbsensiController extends Controller
             
 
         ]);
-
+        
         return redirect('absen')->with('updated_success', 'Data Berhasil diupdate');
     }
 }

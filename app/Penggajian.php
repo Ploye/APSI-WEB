@@ -40,7 +40,6 @@ class Penggajian extends Model
 
         $penggajian = Penggajian::where('id',$id)->get();
         return $penggajian;
-
+      
     }
-    
 }

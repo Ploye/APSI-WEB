@@ -21,22 +21,34 @@
                       <form method="post" action="{{action('AbsensiController@update', 'update')}}">
                           @method('PATCH')
                           @csrf
-                              <div class="form-group">
+                              
                                 {{-- <label>ID</label> --}}
-                                <input type="text" name="id" class="form-control" id="edit-id" readonly>
+                                <input type="hidden" name="id" class="form-control" id="edit-id" readonly>
+                                <div class="form-group">
                                 <label>ID Pegawai</label>
                                 <input type="text" name="id_pegawai" class="form-control" id="edit-id_pegawai" readonly>
+                                </div>
+                                <div class="form-group">
                                 <label>Nama Pegawai</label>
                                 <input type="text" name="nama_pegawai" class="form-control" id="edit-nama_pegawai" readonly>
+                                </div>
+                                <div class="form-group">
                                 <label>Jabatan</label>
                                 <input type="text" name="jabatan" class="form-control" id="edit-jabatan" readonly>
+                                </div>
+                                <div class="form-group">
                                 <label>Gaji Pokok</label>
                                 <input type="text" name="gaji_pokok" class="form-control" id="edit-gaji_pokok" readonly>
+                                </div>
+                                <div class="form-group">
                                 <label>Jumlah Tidak Hadir</label>
                                 <input type="text" name="jml_tidak_hadir" class="form-control" id="edit-jml_tidak_hadir" readonly>
+                                </div>
+                                <div class="form-group">
                                 <label>Gaji Di Terima</label>
                                 <input type="text" name="gaji_diterima" class="form-control" id="edit-gaji_diterima" readonly>
-                              </div>
+                                </div>
+                              
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -65,19 +77,26 @@
                     </thead>
                     <tbody class="text-center">
                         @php
-                            $no = 1;   
+                            $no = 1;
+                            
                         @endphp
             
                         @foreach ($penggajians as $penggajian)
+                        @php
+                           $no = 1; 
+                        @endphp
                             <tr>
                                 <td>{{ $no++}}</td>
                                 <td>{{ $penggajian->pegawai->id_pegawai}}</td>
                                 <td>{{ $penggajian->pegawai->nama}}</td>
                                 <td>{{ $penggajian->pegawai->jabatan}}</td>
                                 {{-- <td>{{ $penggajian->absen->tanggal}}</td> --}}
-                                <td>{{ $penggajian->gaji_pokok}}</td>
+                                {{-- <td>{{ $jmlabsen }}</td> --}}
+                                {{-- <td>{{ $penggajian->$jmlabsen }}</td> --}}
+                                <td>@currency($penggajian->gaji_pokok)</td>
+                                {{-- <td>{{ }}</td> --}}
                                 <td>{{ $penggajian->jml_tidak_hadir}}</td>
-                                <td>{{ $penggajian->gaji_diterima}}</td>
+                                <td>@currency($penggajian->gaji_diterima)</td>
                                 <td> 
                                   {{-- <input type="hidden" name="id" class="form-control" id="edit-id_penggajian">
                                   <input type="hidden" name="status" class="form-control" id="edit-status" value="0"> --}}
