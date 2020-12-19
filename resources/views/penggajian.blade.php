@@ -23,7 +23,7 @@
                           @csrf
                               <div class="form-group">
                                 {{-- <label>ID</label> --}}
-                                <input type="hidden" name="id" class="form-control" id="edit-id" readonly>
+                                <input type="text" name="id" class="form-control" id="edit-id" readonly>
                                 <label>ID Pegawai</label>
                                 <input type="text" name="id_pegawai" class="form-control" id="edit-id_pegawai" readonly>
                                 <label>Nama Pegawai</label>
@@ -135,7 +135,7 @@
 
              $('#edit-id').val(res[0].id);
              $('#edit-id_pegawai').val(res[0].id_pegawai);
-             $('#edit-nama_pegawai').text(res[0].nama_pegawai);
+             $('#edit-nama_pegawai').val(res[0].nama);
             $('#edit-jabatan').val(res[0].jabatan);
             $('#edit-jenis_kelamin').val(res[0].jenis_kelamin);
             $('#edit-gaji_pokok').val(res[0].gaji_pokok);

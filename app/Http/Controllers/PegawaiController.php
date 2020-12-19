@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pegawai;
+use App\Absen;
+use App\Penggajian;
 class PegawaiController extends Controller
 {
     /**
@@ -84,6 +86,7 @@ return Response($output);
     public function store(Request $request)
     {
         $pegawai = new Pegawai;
+        $penggajian = new Penggajian;
         $pegawai->id_pegawai = $request->get('id_pegawai');
         $pegawai->nama = $request->get('nama');
         $pegawai->jenis_kelamin = $request->get('jenis_kelamin');
@@ -91,8 +94,23 @@ return Response($output);
         $pegawai->jabatan = $request->get('jabatan');
         $pegawai->alamat = $request->get('alamat');
         $pegawai->email = $request->get('email');
-
+        $penggajian->nama = $request->get('nama');
+        $penggajian->jabatan = $request->get('jabatan');
         $pegawai->save();
+
+        $absen = new Absen;
+        $absen->id_pegawai = $request->get('id_pegawai');
+        $absen->status = '0';
+        $absen->save();
+
+       
+        $penggajian->id_pegawai = $request->get('id_pegawai');
+        $penggajian->gaji_pokok = null;
+        $penggajian->jml_tidak_hadir = null;
+        $penggajian->gaji_diterima = null;
+        $penggajian->absen_id= null;
+        
+        $penggajian->save();
 
         return redirect('pegawai')->with('added_success', 'Data Berhasil ditambahkan');
     }
@@ -153,8 +171,14 @@ return Response($output);
      */
     public function destroy(Request $request,$id)
     {
+        $penggajian = Penggajian::where('id_pegawai', $request->get('id_pegawai'))
+        ->delete();
+        $absen = Absen::where('id_pegawai', $request->get('id_pegawai'))
+        ->delete();
         $pegawai = Pegawai::where('id_pegawai', $request->get('id_pegawai'))
         ->delete();
+
+        
 
         return redirect('pegawai')->with('deleted_success', 'Data berhasil dihapus');
     }
