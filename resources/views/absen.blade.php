@@ -74,7 +74,9 @@
     $('.toggle-class').change(function() {
         var status = $(this).prop('checked') == true ? 1 : 0; 
         var id = $(this).data('id'); 
-        
+        // var hadirr = 0;
+        // var tidakk = 0;
+     
         $.ajax({
             type: "GET",
             dataType: "json",
@@ -82,6 +84,8 @@
             data: {'status': status, 'id': id},
             success: function(data){
               console.log(data.success)
+              
+            
             }
         });
 

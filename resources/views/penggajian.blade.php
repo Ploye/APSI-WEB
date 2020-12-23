@@ -15,7 +15,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
-                        <h2 class="modal-title" id="exampleModalLabel">Hadir</h2>
+                        <h2 class="modal-title" id="exampleModalLabel">Cetak Slip</h2>
                       </div>
                       <div class="modal-body">
                       <form method="post" action="{{action('AbsensiController@update', 'update')}}">
@@ -41,8 +41,8 @@
                                 <input type="text" name="gaji_pokok" class="form-control" id="edit-gaji_pokok" readonly>
                                 </div>
                                 <div class="form-group">
-                                <label>Jumlah Tidak Hadir</label>
-                                <input type="text" name="jml_tidak_hadir" class="form-control" id="edit-jml_tidak_hadir" readonly>
+                                <label>Jumlah Hadir</label>
+                                <input type="text" name="jml_tidak_hadir" class="form-control" id="edit-jml_hadir" readonly>
                                 </div>
                                 <div class="form-group">
                                 <label>Gaji Di Terima</label>
@@ -52,15 +52,15 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning">Update</button>
+                        <button type="submit" class="btn btn-warning">Cetak</button>
                       </form>
                       </div>
                     </div>
                   </div>
                 </div>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Cetak Laporan</button>
-                <br>
-                <br>
+                
+                <button type="button" class="btn btn-primary" >Cetak Laporan</button>
+              
                 <table class="table table-bordered">
                     <thead  class="text-center">
                         <tr>
@@ -69,7 +69,7 @@
                             <td>Nama Pegawai</td>
                             <td>Jabatan</td>
                             <td>Gaji Pokok</td>
-                            <td>Jumlah Tidak Hadir</td>
+                            <td>Jumlah Kehadiran</td>
                             <td>Gaji Di Terima</td>
                             <td>Opsi</td>
                             
@@ -95,7 +95,7 @@
                                 {{-- <td>{{ $penggajian->$jmlabsen }}</td> --}}
                                 <td>@currency($penggajian->gaji_pokok)</td>
                                 {{-- <td>{{ }}</td> --}}
-                                <td>{{ $penggajian->jml_tidak_hadir}}</td>
+                                <td>{{ $penggajian->jml_hadir}}</td>
                                 <td>@currency($penggajian->gaji_diterima)</td>
                                 <td> 
                                   {{-- <input type="hidden" name="id" class="form-control" id="edit-id_penggajian">
@@ -158,7 +158,7 @@
             $('#edit-jabatan').val(res[0].jabatan);
             $('#edit-jenis_kelamin').val(res[0].jenis_kelamin);
             $('#edit-gaji_pokok').val(res[0].gaji_pokok);
-            $('#edit-jml_tidak_hadir').val(res[0].jml_tidak_hadir);
+            $('#edit-jml_hadir').val(res[0].jml_hadir);
             $('#edit-gaji_diterima').val(res[0].gaji_diterima);
             
       

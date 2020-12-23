@@ -8,7 +8,7 @@ class Penggajian extends Model
 {
       // use SoftDeletes;
       protected $table = 'penggajian';
-      protected $primaryKey = 'id_penggajian';
+      protected $primaryKey = 'id';
       public $incrementing = false;
       protected $keyType = 'char';
       // protected $attributes = [

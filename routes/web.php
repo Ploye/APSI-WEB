@@ -27,6 +27,7 @@ Route::resource('pegawai', 'PegawaiController');
 Route::resource('absen', 'AbsensiController');
 Route::resource('penggajian', 'PenggajianController');
 
+
 // Route::get('/admin', 'BlogController@admin');
 
 //husen

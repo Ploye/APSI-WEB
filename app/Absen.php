@@ -40,6 +40,7 @@ class Absen extends Model
 
         $absen = Absensi::where('id',$id)->get();
         return $absen;
+        
 
     }
 }

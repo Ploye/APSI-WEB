@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Penggajian;
+use PDF;
 class PenggajianController extends Controller
 {
     /**
@@ -19,6 +20,7 @@ class PenggajianController extends Controller
         return view('penggajian', compact('penggajians'));
         
     }
+     
 
     /**
      * Show the form for creating a new resource.

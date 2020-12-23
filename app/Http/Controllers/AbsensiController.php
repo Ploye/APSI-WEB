@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 use App\Absen;
 use Illuminate\Support\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
+use DB;
+use App\Penggajian;
+use App\Pegawai;
+
 class AbsensiController extends Controller
+
+
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +22,6 @@ class AbsensiController extends Controller
     
     public function index()
     {
-   
         $absens = Absen::all();
         // Absen::where('status', '=', 1)->update(array('status' => 0));
         // Absen::where('status', '>', Carbon::now())->delete();
@@ -32,10 +37,66 @@ class AbsensiController extends Controller
     {
         $absen = Absen::find($request->id);
         $absen->status = $request->status;
-
+        //kodingana kumaha didinea ris?
+        // bukan di change status sih
+        // pas nampilkeun jmlh kehadiranna
         $absen->save();
+
+        $idpegawai = $absen->id_pegawai;
+
+        $checkAbsensi = DB::table('absen')
+                            ->selectRaw('(SELECT count(status) FROM absen WHERE status = 1 AND id_pegawai = "'.$idpegawai.'") as `jml_hadir`, (SELECT count(status) FROM absen WHERE status = 0 AND id_pegawai = "'.$idpegawai.'") as `jml_tidak_hadir`')
+                            ->where('id_pegawai',$idpegawai)
+                            ->first();
+
+        $checkPenggajian = DB::table('penggajian')
+                        ->where('id_pegawai',$idpegawai)
+                        ->first();
         
+        $gaji='40000';
+        $absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_hadir : 0);
+        $tidak_absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_tidak_hadir : 0);
+
         
+
+        $total_absen =  $absen - $tidak_absen;
+        $gaji_di_termia = ($absen > 0 ? $gaji * $total_absen : 0);
+
+        
+
+        if(empty($checkPenggajian)){
+
+            $getPegawai = Pegawai::findOrFail($idpegawai);
+
+            $penggajian = new Penggajian;
+            $penggajian->nama = $getPegawai->nama;
+            $penggajian->jabatan = $getPegawai->jabatan;
+            $penggajian->id_pegawai = $idpegawai;
+            $penggajian->gaji_pokok = $gaji;
+            $penggajian->jml_hadir = $absen;
+            $penggajian->gaji_diterima = $gaji_di_termia;
+            $penggajian->absen_id= null;
+            
+            $penggajian->save();
+
+        }else{
+
+            $getPegawai = Pegawai::findOrFail($idpegawai);
+
+            $penggajian = Penggajian::findOrFail($checkPenggajian->id);
+            $penggajian->nama = $getPegawai->nama;
+            $penggajian->jabatan = $getPegawai->jabatan;
+            $penggajian->id_pegawai = $idpegawai;
+            $penggajian->gaji_pokok = $gaji;
+            $penggajian->jml_hadir = $absen;
+            $penggajian->gaji_diterima = $gaji_di_termia;
+            $penggajian->absen_id= null;
+            
+            $penggajian->update();
+
+        }
+        
+
         return response()->json(['success'=>'Status change successfully.']);
         
     }
