@@ -144,7 +144,11 @@
                             data-id_pegawai="{{$pegawai->id_pegawai}}"
                             
                             >Hapus</button>
-                          </div></td>
+                            {{-- <button type="button" class="btn btn-primary" id="btn-edit-pegawai"
+                          
+                            >Absen</button> --}}
+                          </div>
+                          </td>
                     </tr>
                 @endforeach
                   </tbody>

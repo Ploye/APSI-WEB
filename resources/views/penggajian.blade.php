@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+
 @extends('layouts.nav')
 @section('content')
 
@@ -59,12 +61,47 @@
                   </div>
                 </div>
                 
-                <button type="button" class="btn btn-primary" >Cetak Laporan</button>
+
+                <div class="row">
+                  <div class="col-md-5">
+                    <label>Bulan</label>
+                    <select name="bulan" id="bulan" class="form-control">
+                      <option value="01" <?= (date('m') == '01' ? 'selected' : '') ?>>Januari</option>
+                      <option value="02" <?= (date('m') == '02' ? 'selected' : '') ?>>Februari</option>
+                      <option value="03" <?= (date('m') == '03' ? 'selected' : '') ?>>Maret</option>
+                      <option value="04" <?= (date('m') == '04' ? 'selected' : '') ?>>April</option>
+                      <option value="05" <?= (date('m') == '05' ? 'selected' : '') ?>>Mei</option>
+                      <option value="06" <?= (date('m') == '06' ? 'selected' : '') ?>>Juni</option>
+                      <option value="07" <?= (date('m') == '07' ? 'selected' : '') ?>>Juli</option>
+                      <option value="08" <?= (date('m') == '08' ? 'selected' : '') ?>>Agustus</option>
+                      <option value="09" <?= (date('m') == '09' ? 'selected' : '') ?>>September</option>
+                      <option value="10" <?= (date('m') == '10' ? 'selected' : '') ?>>Oktober</option>
+                      <option value="11" <?= (date('m') == '11' ? 'selected' : '') ?>>November</option>
+                      <option value="12" <?= (date('m') == '12' ? 'selected' : '') ?>>Desember</option>
+                    </select>
+                  </div>
+                  <div class="col-md-5">
+                    <label>Tahun</label>
+                    <select name="tahun" id="tahun" class="form-control">
+                      <option value="<?= date('Y', strtotime('+2 years')) ?>"><?= date('Y', strtotime('+2 years')) ?></option>
+                      <option value="<?= date('Y', strtotime('+1 year')) ?>"><?= date('Y', strtotime('+1 year')) ?></option>
+                      <option value="<?= date('Y') ?>" selected><?= date('Y') ?></option>
+                      <option value="<?= date('Y', strtotime('-1 year')) ?>"><?= date('Y', strtotime('-1 year')) ?></option>
+                      <option value="<?= date('Y', strtotime('-2 years')) ?>"><?= date('Y', strtotime('-2 years')) ?></option>
+                    </select>
+                  </div>
+                  <div class="col-md-2">
+                    <label>Search</label>
+                    <button class="btn btn-primary form-control" id="searchNow">Cari</button>
+                  </div>
+                </div>
+                <hr>
               
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="tablePenggajian">
                     <thead  class="text-center">
                         <tr>
                             <td>No</td>
+                            <th>Periode</th>
                             <td>ID Pegawai</td>
                             <td>Nama Pegawai</td>
                             <td>Jabatan</td>
@@ -72,43 +109,9 @@
                             <td>Jumlah Kehadiran</td>
                             <td>Gaji Di Terima</td>
                             <td>Opsi</td>
-                            
                         </tr>
                     </thead>
-                    <tbody class="text-center">
-                        @php
-                            $no = 1;
-                            
-                        @endphp
-            
-                        @foreach ($penggajians as $penggajian)
-                        @php
-                           $no = 1; 
-                        @endphp
-                            <tr>
-                                <td>{{ $no++}}</td>
-                                <td>{{ $penggajian->pegawai->id_pegawai}}</td>
-                                <td>{{ $penggajian->pegawai->nama}}</td>
-                                <td>{{ $penggajian->pegawai->jabatan}}</td>
-                                {{-- <td>{{ $penggajian->absen->tanggal}}</td> --}}
-                                {{-- <td>{{ $jmlabsen }}</td> --}}
-                                {{-- <td>{{ $penggajian->$jmlabsen }}</td> --}}
-                                <td>@currency($penggajian->gaji_pokok)</td>
-                                {{-- <td>{{ }}</td> --}}
-                                <td>{{ $penggajian->jml_hadir}}</td>
-                                <td>@currency($penggajian->gaji_diterima)</td>
-                                <td> 
-                                  {{-- <input type="hidden" name="id" class="form-control" id="edit-id_penggajian">
-                                  <input type="hidden" name="status" class="form-control" id="edit-status" value="0"> --}}
-                                  <button type="submit" class="btn btn-primary" id="btn-edit-penggajian"
-                           data-toggle="modal" 
-                           data-target="#update"
-                           data-id="{{$penggajian->id}}"
-                           
-                          >Cetak Slip</button></td>
-                                
-                            </tr>
-                        @endforeach
+                    <tbody class="text-center" id="bodyPenggajian">
                       
                     </tbody>
                 </table>
@@ -128,8 +131,57 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="admin/dist/js/sb-admin-2.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
 {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 <script>
+
+  $(function(){
+
+    $('#searchNow').click(function(){
+
+      let bulan = $('#bulan').val();
+      let tahun = $('#tahun').val();
+      let holder = $('#bodyPenggajian');
+
+      if ( $.fn.dataTable.isDataTable( '#tablePenggajian' ) ) {
+        $('#tablePenggajian').DataTable().destroy();
+      }
+
+      // var table = $(document).find('#tablePenggajian').DataTable();
+      // table.clear().draw();
+
+      let link = '{{ url("filterPenggajian/") }}/'+bulan+'/'+tahun;
+
+      let loading = '<tr><td colspan="9"><center><h3>Memuat..</h3></center></td></tr>';
+      holder.html(loading);
+
+      
+
+      $.get(link,function(res){
+
+        holder.html(res);
+
+        $(document).find('#tablePenggajian').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ],
+        } );
+
+      });
+
+    });
+
+  });
+
   $(document).on('click','#btn-edit-penggajian',function(){
       let id = $(this).data('id');
       // let nama = $(this).data('nama');

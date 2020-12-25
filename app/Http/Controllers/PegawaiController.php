@@ -90,7 +90,7 @@ return Response($output);
     {
         
         $pegawai = new Pegawai;
-        $penggajian = new Penggajian;
+        // $penggajian = new Penggajian;
         $pegawai->id_pegawai = $request->get('id_pegawai');
         $pegawai->nama = $request->get('nama');
         $pegawai->jenis_kelamin = $request->get('jenis_kelamin');
@@ -98,39 +98,39 @@ return Response($output);
         $pegawai->jabatan = $request->get('jabatan');
         $pegawai->alamat = $request->get('alamat');
         $pegawai->email = $request->get('email');
-        $penggajian->nama = $request->get('nama');
-        $penggajian->jabatan = $request->get('jabatan');
+        // $penggajian->nama = $request->get('nama');
+        // $penggajian->jabatan = $request->get('jabatan');
         $pegawai->save();
         
        
-        $absen = new Absen;
-        $absen->id_pegawai = $request->get('id_pegawai');
-        $absen->status = '0';
-        $absen->save();
+        // $absen = new Absen;
+        // $absen->id_pegawai = $request->get('id_pegawai');
+        // $absen->status = '0';
+        // $absen->save();
 
         // Berarti query nu tadi simpen didieu
 
         $idpegawai = $request->get('id_pegawai');
 
-        $checkAbsensi = DB::table('absen')
-                            ->selectRaw('(SELECT count(status) FROM absen WHERE status = 1 AND id_pegawai = "'.$idpegawai.'") as `jml_hadir`, (SELECT count(status) FROM absen WHERE status = 0 AND id_pegawai = "'.$idpegawai.'") as `jml_tidak_hadir`')
-                            ->where('id_pegawai',$idpegawai)
-                            ->first();
+        // $checkAbsensi = DB::table('absen')
+        //                     ->selectRaw('(SELECT count(status) FROM absen WHERE status = 1 AND id_pegawai = "'.$idpegawai.'") as `jml_hadir`, (SELECT count(status) FROM absen WHERE status = 0 AND id_pegawai = "'.$idpegawai.'") as `jml_tidak_hadir`')
+        //                     ->where('id_pegawai',$idpegawai)
+        //                     ->first();
 
-        $gaji='40000';
-        $absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_hadir : 0);
-        $tidak_absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_tidak_hadir : 0);
-        //ddie kah?
-        //krk di variable isi gajih nateh
-        $total_absen =  $absen - $tidak_absen;
-        $gaji_di_termia = $gaji * $total_absen;
-        $penggajian->id_pegawai = $request->get('id_pegawai');
-        $penggajian->gaji_pokok = $gaji;
-        $penggajian->jml_hadir = $absen;
-        $penggajian->gaji_diterima = $gaji_di_termia;
-        $penggajian->absen_id= null;
+        // $gaji='40000';
+        // $absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_hadir : 0);
+        // $tidak_absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_tidak_hadir : 0);
+        // //ddie kah?
+        // //krk di variable isi gajih nateh
+        // $total_absen =  $absen - $tidak_absen;
+        // $gaji_di_termia = $gaji * $total_absen;
+        // $penggajian->id_pegawai = $request->get('id_pegawai');
+        // $penggajian->gaji_pokok = $gaji;
+        // $penggajian->jml_hadir = '0';
+        // $penggajian->gaji_diterima = null;
+        // $penggajian->absen_id= null;
         
-        $penggajian->save();
+        // $penggajian->save();
 
         return redirect('pegawai')->with('added_success', 'Data Berhasil ditambahkan');
     }

@@ -43,6 +43,9 @@ Route::post('kelolabaju/restore', 'BajuController@restore');
 Route::post('kelolabaju/forceDelete', 'BajuController@forceDelete');
 
 
+Route::get('filterPenggajian/{bulan}/{tahun}', 'PenggajianController@getFilterPenggajian');
+
+
 // Route::post('pegawai/emptyAll', 'PegawaiController@emptyAll');
 // Route::post('pegawai/restoreAll', 'PegawaiController@restoreAll');
 // Route::post('pegawai/restore', 'PegawaiController@restore');

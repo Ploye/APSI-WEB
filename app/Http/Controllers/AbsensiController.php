@@ -22,7 +22,29 @@ class AbsensiController extends Controller
     
     public function index()
     {
+
+        // DI dieu jieun fungsi jang insert k absensi okeoke
+
+
+        $getDataPegawai = Pegawai::all();
+        foreach($getDataPegawai as $peg):
+
+            $check = Absen::whereDate('created_at', Carbon::today())->where('id_pegawai', $peg->id_pegawai)->first();
+
+            if(!empty($check)){}else{
+
+                $absen = new Absen;
+                $absen->id_pegawai = $peg->id_pegawai;
+                $absen->status = '0';
+                $absen->save();
+
+            }
+
+        endforeach;
+
+
         $absens = Absen::all();
+        $absens = Absen::whereDate('created_at', Carbon::today())->get();
         // Absen::where('status', '=', 1)->update(array('status' => 0));
         // Absen::where('status', '>', Carbon::now())->delete();
         
@@ -55,11 +77,11 @@ class AbsensiController extends Controller
         
         $gaji='40000';
         $absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_hadir : 0);
-        $tidak_absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_tidak_hadir : 0);
+        // $tidak_absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_tidak_hadir : 0);
 
         
 
-        $total_absen =  $absen - $tidak_absen;
+        $total_absen =  $absen;
         $gaji_di_termia = ($absen > 0 ? $gaji * $total_absen : 0);
 
         
