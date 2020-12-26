@@ -19,22 +19,12 @@ class PegawaiController extends Controller
     public function index()
     {
         $pegawais = Pegawai::all();
-        // $lastID = pegawai::getLastID();
-        // return view('pegawai.DataPendonor',["user"=>$user],[
-        //     "datadonor" =>$datadonor, 
-        //     "lastID" => $lastID
-        //     ]);
-        // $trash = Pegawai::onlyTrashed()->get();
-        return view('pegawai', compact('pegawais'));
+        $lastID = Pegawai::getLastID();
+  
+        return view('pegawai',["lastID"=>$lastID], compact('pegawais'));
         
     }
-    // public function cari(Request $request)
-	// {
-    //     $nama = $request->nama;
-    //     $pegawais = Pegawai::where('nama','like',"%".$nama."%")->paginate(2);
-    //     return view('pegawai',compact('pegawais'));
  
-    // }
     public function search(Request $request)
 {
 if($request->ajax())
@@ -86,11 +76,12 @@ return Response($output);
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
         
         $pegawai = new Pegawai;
-        // $penggajian = new Penggajian;
+
         $pegawai->id_pegawai = $request->get('id_pegawai');
         $pegawai->nama = $request->get('nama');
         $pegawai->jenis_kelamin = $request->get('jenis_kelamin');
@@ -98,39 +89,9 @@ return Response($output);
         $pegawai->jabatan = $request->get('jabatan');
         $pegawai->alamat = $request->get('alamat');
         $pegawai->email = $request->get('email');
-        // $penggajian->nama = $request->get('nama');
-        // $penggajian->jabatan = $request->get('jabatan');
+
         $pegawai->save();
-        
-       
-        // $absen = new Absen;
-        // $absen->id_pegawai = $request->get('id_pegawai');
-        // $absen->status = '0';
-        // $absen->save();
-
-        // Berarti query nu tadi simpen didieu
-
         $idpegawai = $request->get('id_pegawai');
-
-        // $checkAbsensi = DB::table('absen')
-        //                     ->selectRaw('(SELECT count(status) FROM absen WHERE status = 1 AND id_pegawai = "'.$idpegawai.'") as `jml_hadir`, (SELECT count(status) FROM absen WHERE status = 0 AND id_pegawai = "'.$idpegawai.'") as `jml_tidak_hadir`')
-        //                     ->where('id_pegawai',$idpegawai)
-        //                     ->first();
-
-        // $gaji='40000';
-        // $absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_hadir : 0);
-        // $tidak_absen = (!empty($checkAbsensi) ? $checkAbsensi->jml_tidak_hadir : 0);
-        // //ddie kah?
-        // //krk di variable isi gajih nateh
-        // $total_absen =  $absen - $tidak_absen;
-        // $gaji_di_termia = $gaji * $total_absen;
-        // $penggajian->id_pegawai = $request->get('id_pegawai');
-        // $penggajian->gaji_pokok = $gaji;
-        // $penggajian->jml_hadir = '0';
-        // $penggajian->gaji_diterima = null;
-        // $penggajian->absen_id= null;
-        
-        // $penggajian->save();
 
         return redirect('pegawai')->with('added_success', 'Data Berhasil ditambahkan');
     }
@@ -180,7 +141,7 @@ return Response($output);
 
         ]);
 
-        return redirect('pegawai')->with('updated_success', 'Data Berhasil diupdate');
+        return redirect('pegawai')->with('updated_success', 'Data Berhasil di Ubah');
     }
 
 

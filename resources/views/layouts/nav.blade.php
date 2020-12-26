@@ -39,7 +39,7 @@
                         <a href="/pegawai">Pegawai</a>
                     </li>
                     <li>
-                        <a href="/absen">Absensi</a>
+                        <a href="/absen">Absensi</a> 
                         <a href="/penggajian">Penggajian</a>
                         <a href="/kelolabaju">Kelola Baju</a>
                     </li>

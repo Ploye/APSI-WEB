@@ -53,8 +53,8 @@
                               
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-warning">Cetak</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-warning">Cetak Sekarang</button>
                       </form>
                       </div>
                     </div>
@@ -91,7 +91,7 @@
                     </select>
                   </div>
                   <div class="col-md-2">
-                    <label>Search</label>
+                    <label>&nbsp;</label>
                     <button class="btn btn-primary form-control" id="searchNow">Cari</button>
                   </div>
                 </div>
@@ -169,9 +169,9 @@
         $(document).find('#tablePenggajian').DataTable( {
             dom: 'Bfrtip',
             buttons: [
-                'copyHtml5',
+                // 'copyHtml5',
                 'excelHtml5',
-                'csvHtml5',
+                // 'csvHtml5',
                 'pdfHtml5'
             ],
         } );

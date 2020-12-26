@@ -27,28 +27,6 @@ class Pegawai extends Model
         'email'
 
     ];
-
-    static function getPegawaiid()
-   {
-    $getLastData = DB::table('RIGHT(pegawai.id_pegawai,2) as kode', FALSE)->orderBy('id_pegawai','DESC')->limit(1);
-    
-    if(empty($getLastData)){
-        return 'P001';
-    }else{
-        
-        if(empty($getLastData->reg_id)){
-            return 'P001';
-        }else{
-
-            $temp = $getLastData->reg_id;
-            $removeInitial = substr($temp,1);
-            $increment = $removeInitial + 1;
-            $arrange = 'P'.sprintf('%03d',$increment);
-
-            return $arrange;
-        }
-    }
-}
     public function absensi()
     {
         return $this->hasOne(Absensi::class);
@@ -64,6 +42,29 @@ class Pegawai extends Model
 
         $pegawai = Pegawai::where('id_pegawai',$id_pegawai)->get();
         return $pegawai;
+
+    }
+    static function getLastID(){
+        $getLastData = DB::table('pegawai')->orderBy('id_pegawai','DESC')->first();
+        if(empty($getLastData)){
+            return 'P001';
+        }else{
+            
+            if(empty($getLastData->id_pegawai)){
+                return 'P001';
+            }else{
+
+                $temp = $getLastData->id_pegawai;
+                $removeInitial = substr($temp,1);
+                $increment = $removeInitial + 1;
+                $arrange = 'P'.sprintf('%03d',$increment);
+
+                return $arrange;
+            }
+            
+        }
+       
+
 
     }
 }

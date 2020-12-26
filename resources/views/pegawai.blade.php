@@ -43,7 +43,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <h2 class="modal-title" id="exampleModalLabel">Update Pegawai</h2>
+                <h2 class="modal-title" id="exampleModalLabel">Ubah Pegawai</h2>
               </div>
               <div class="modal-body">
               <form method="post" action="{{action('PegawaiController@update', 'update')}}">
@@ -79,14 +79,14 @@
                     </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-warning">Update</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-warning">Perbarui</button>
               </form>
               </div>
             </div>
           </div>
         </div>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Data</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Pegawai</button>
         <form class="form-inline "><br>
           <div class="form-group mx-sm-3 mb-2 ">
             <input type="text" class="form-control" id="search" name="search" placeholder="Cari"></input>
@@ -175,36 +175,40 @@
                       @csrf
                           <div class="form-group">
                             <label>ID Pegawai</label>
-                          <input type="text" name="id_pegawai" class="form-control">
+                          <input type="text" name="id_pegawai" class="form-control" value="{{ $lastID }}" readonly>
                           </div>
                           <div class="form-group">
                           <label>Nama</label>
-                            <input type="text" name="nama" class="form-control" required>
+                            <input type="text" name="nama" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                           </div>
                           <div class="form-group">
                           <label>Jenis Kelamin</label>
-                          <input type="text" name="jenis_kelamin" class="form-control" required>
+                          <input type="text" name="jenis_kelamin" class="form-control" required required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                         </div>
                         <div class="form-group">
                           <label>No HP</label>
-                          <input type="text" name="no_hp" class="form-control" required>
+                          <input type="number" name="no_hp" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                         </div>
                         <div class="form-group">
                           <label>Jabatan</label>
-                          <input type="text" name="jabatan" class="form-control" required>
+                          <select class="form-control" name="jabatan">
+                            <option value="">--</option>
+                            <option name="jabatan" value="Admin">Admin</option>
+                            <option name="jabatan" value="Produksi">Produksi</option>                 
+                          </select>
                         </div>
                         <div class="form-group">
                           <label>Alamat</label>
-                          <input type="text" name="alamat" class="form-control" required>
+                          <input type="text" name="alamat" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                         </div>
                         <div class="form-group">
                           <label>Email</label>
-                          <input type="text" name="email" class="form-control" required>
+                          <input type="email" name="email" class="form-control" required oninvalid="this.setCustomValidity('Harap isi dengan email yang benar')" oninput="setCustomValidity('')">
                         </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                   </form>
                   </div>
                 </div>
@@ -230,8 +234,8 @@
                             <input type="text" name="id_pegawai" id="delete-id_pegawai">
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                    <button type="submit" class="btn btn-primary">Ya</button>
                   </form>
                   </div>
                 </div>

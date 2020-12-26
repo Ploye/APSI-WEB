@@ -226,17 +226,21 @@
                 </ul>
                 <!-- /.dropdown-alerts -->
             </li> 
-                    @guest
+            {{-- ie bro --}}
+            @guest
                             <li class="nav-item">
-                                <a class="nav-link"  data-toggle="modal" data-target="#exampleModal" href="{{ route('login') }}">{{ __('Login') }}</a>
-                               
+                                <a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
+
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link"  data-toggle="modal" data-target="#exampleModalreg" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                            {{-- <li class="nav-item">
+                                <a class="nav-link"  data-toggle="modal" data-target="#exampleModalreg" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            </li> --}}
                             @endif
                         @else
+                        <li class="nav-item">
+                            <a class="nav-link"  data-toggle="modal" data-target="#exampleModalreg" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -254,6 +258,7 @@
                                     </form>
                                 </div>
                             </li>
+                            
                         @endguest
                 </ul>
                 <!-- /.dropdown-user -->
@@ -300,8 +305,8 @@
         </div>  
         <div class="modal-footer">
            
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">{{ __('Login') }}</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-primary">{{ __('Masuk') }}</button>
             </div>
             </div>
             </div>
@@ -375,7 +380,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-primary">{{ __('Register') }}</button>
+                    <button type="submit" class="btn btn-primary" >{{ __('Register') }}</button>
                     </div>
             </div>
       </div>
@@ -386,6 +391,7 @@
   </div>
 </form>
 </html>
+
 <main class="py-4">
     @yield('content')
 </main>
