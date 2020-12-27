@@ -116,6 +116,7 @@
                 </div>
             </div>
         </div>
+        
 <!-- jQuery -->
 <script src="admin/vendor/jquery/jquery.min.js"></script>
 

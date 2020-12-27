@@ -12,15 +12,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Absensi</h1>
-                {{-- @if (session('updated_success'))
-                <div class="alert alert-success" role="alert">
-                    {{session('updated_success')}}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  @endif --}}
-               
+                <a href="generatePDF" class="btn btn-primary" target="_blank">CETAK PDF</a>
+              <br>
+              <br>
                 <table class="table table-bordered">
                     <thead  class="text-center">
                         <tr>

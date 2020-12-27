@@ -9,6 +9,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use DB;
 use App\Penggajian;
 use App\Pegawai;
+use PDF;
 
 class AbsensiController extends Controller
 
@@ -54,14 +55,21 @@ class AbsensiController extends Controller
         
         
     }
+    public function generatePDF()
+
+    {
+           
+        $absens= Absen::orderby('id_pegawai','ASC')->get();
+        $pdf = PDF::loadView('laporanabsen',compact('absens'));
+        return $pdf->download('laporan-absen-pdf.pdf');
+        // return view('laporanabsen', compact('absens'));
+
+    }
 
     public function changeStatus(Request $request)
     {
         $absen = Absen::find($request->id);
         $absen->status = $request->status;
-        //kodingana kumaha didinea ris?
-        // bukan di change status sih
-        // pas nampilkeun jmlh kehadiranna
         $absen->save();
 
         $idpegawai = $absen->id_pegawai;

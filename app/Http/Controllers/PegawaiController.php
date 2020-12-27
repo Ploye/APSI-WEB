@@ -8,6 +8,7 @@ use App\Absen;
 use App\Penggajian;
 use Illuminate\Support\Carbon;
 use DB;
+use PDF;
 
 class PegawaiController extends Controller
 {
@@ -23,6 +24,17 @@ class PegawaiController extends Controller
   
         return view('pegawai',["lastID"=>$lastID], compact('pegawais'));
         
+    }
+
+    public function generatePDF()
+
+    {
+        // $data = ['title' => 'Welcome to belajarphp.net'];
+        $pegawais= Pegawai::all();
+        $pdf = PDF::loadView('laporanpegawai',compact('pegawais'));
+        return $pdf->download('laporan-pegawai-pdf.pdf');
+        // return view('laporanpegawai', compact('pegawais'));
+
     }
  
     public function search(Request $request)

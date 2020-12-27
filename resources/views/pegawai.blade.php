@@ -87,6 +87,9 @@
           </div>
         </div>
         <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Pegawai</button>
+   
+        <a href="generatePDF" class="btn btn-primary" target="_blank">CETAK PDF</a>
+    
         <form class="form-inline "><br>
           <div class="form-group mx-sm-3 mb-2 ">
             <input type="text" class="form-control" id="search" name="search" placeholder="Cari"></input>

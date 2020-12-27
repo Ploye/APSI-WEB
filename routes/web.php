@@ -22,10 +22,12 @@ Route::get('/kelolabaju', 'BajuController@index');
 Route::get('/absen', 'AbsensiController@index');
 Route::get('/penggajian', 'PenggajianController@index');
 Route::get('changeStatus', 'AbsensiController@changeStatus');
-//musa
 Route::resource('pegawai', 'PegawaiController');
 Route::resource('absen', 'AbsensiController');
 Route::resource('penggajian', 'PenggajianController');
+//Report
+Route::get('generatePDF','PegawaiController@generatePDF');
+Route::get('generatePDF','AbsensiController@generatePDF');
 
 
 // Route::get('/admin', 'BlogController@admin');
