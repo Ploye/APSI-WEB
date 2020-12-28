@@ -22,6 +22,26 @@ class PenggajianController extends Controller
         return view('penggajian', compact('penggajians'));
         
     }
+
+    public function generatePDF(Request $request)
+
+    {
+
+        $data = array(
+        'id_pegawai' => $request->get('id_pegawai'),
+        'nama_pegawai' => $request->get('nama_pegawai'),
+        'jenis_kelamin' => $request->get('jenis_kelamin'),
+        'jabatan' => $request->get('jabatan'),
+        'gaji_pokok' => $request->get('gaji_pokok'),
+        'jml_tidak_hadir' => $request->get('jml_tidak_hadir'),
+        'gaji_diterima' => $request->get('gaji_diterima'),
+        );
+        
+        // return view('slippegawai', compact('data'));
+        $pdf = PDF::loadView('slippegawai',compact('data'));
+        return $pdf->download('slip-pegawai-pdf.pdf');
+
+    }
      
 
     /**

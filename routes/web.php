@@ -28,6 +28,7 @@ Route::resource('penggajian', 'PenggajianController');
 //Report
 Route::get('generatePDF','PegawaiController@generatePDF');
 Route::get('generatePDF','AbsensiController@generatePDF');
+Route::post('generatePDF','PenggajianController@generatePDF');
 
 
 // Route::get('/admin', 'BlogController@admin');

@@ -20,10 +20,10 @@
                         <h2 class="modal-title" id="exampleModalLabel">Cetak Slip</h2>
                       </div>
                       <div class="modal-body">
-                      <form method="post" action="{{action('AbsensiController@update', 'update')}}">
-                          @method('PATCH')
+                      <form method="post" action="{{action('PenggajianController@generatePDF')}}">
+                          {{-- @method('PATCH') --}}
+                          {{-- {{ method_field('PUT') }} --}}
                           @csrf
-                              
                                 {{-- <label>ID</label> --}}
                                 <input type="hidden" name="id" class="form-control" id="edit-id" readonly>
                                 <div class="form-group">
