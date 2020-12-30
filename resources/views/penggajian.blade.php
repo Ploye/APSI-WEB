@@ -151,7 +151,7 @@
       if ( $.fn.dataTable.isDataTable( '#tablePenggajian' ) ) {
         $('#tablePenggajian').DataTable().destroy();
       }
-
+      
       // var table = $(document).find('#tablePenggajian').DataTable();
       // table.clear().draw();
 
@@ -163,17 +163,30 @@
       
 
       $.get(link,function(res){
-
+        
         holder.html(res);
 
         $(document).find('#tablePenggajian').DataTable( {
             dom: 'Bfrtip',
             buttons: [
-                // 'copyHtml5',
-                'excelHtml5',
-                // 'csvHtml5',
-                'pdfHtml5'
+              {
+            extend: 'excel',
+            text: window.pdfButtonTrans,
+            exportOptions: {
+              columns: [ 0 ,1, 2, 3, 5, 6, 7], // Only name, email and role
+            }
+        },
+                {
+            extend: 'pdf',
+            text: window.pdfButtonTrans,
+            exportOptions: {
+              columns: [ 0 ,1, 2, 3, 5, 6, 7], // Only name, email and role
+            }
+        },
+       
+                
             ],
+            
         } );
 
       });

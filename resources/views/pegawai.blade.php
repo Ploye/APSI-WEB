@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @extends('layouts.nav')
 @section('content')
+<style>
+  th{
+    text-align: center;
+  }
+</style>
     <div id="page-wrapper">
       <meta name="_token" content="{{ csrf_token() }}">
         <div class="row">
@@ -88,7 +93,7 @@
         </div>
         <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Pegawai</button>
    
-        <a href="generatePDF" class="btn btn-primary" target="_blank">CETAK PDF</a>
+        <a href="generatePDF" class="btn btn-info" target="_blank">CETAK PDF</a>
     
         <form class="form-inline "><br>
           <div class="form-group mx-sm-3 mb-2 ">
@@ -99,7 +104,7 @@
                   <table class="table table-bordered text-center">
                   <thead>
                   <tr>
-                    <th>No</th>
+                  <th>No</th>
                   <th>ID</th>
                   <th>Nama Pegawai</th>
                   <th>Jenis Kelamin</th>
@@ -128,7 +133,7 @@
                         <td>{{ $pegawai->email}}</td>
                       
                         <td><div class="btn-group" role="group" aria-label="Basic example">
-                             <button type="button" class="btn btn-primary" id="btn-edit-pegawai"
+                             <button type="button" class="btn btn-warning" id="btn-edit-pegawai"
                              data-toggle="modal" 
                              data-target="#update"
                              data-id_pegawai="{{$pegawai->id_pegawai}}"
@@ -139,7 +144,8 @@
                              data-alamat="{{$pegawai->alamat}}"
                              data-email="{{$pegawai->email}}"
                             >Ubah</button>
-                            
+                           </div>
+                           <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-danger" id="btn-delete-pegawai"
     
                             data-toggle="modal" 
@@ -223,7 +229,7 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Pegawai</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Pegawai</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -234,7 +240,7 @@
                   <form method="post" action="{{action('PegawaiController@destroy', 'delete')}}">
                       @method('DELETE')
                       @csrf
-                            <input type="text" name="id_pegawai" id="delete-id_pegawai">
+                            <input type="text" name="id_pegawai" id="delete-id_pegawai" hidden>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>

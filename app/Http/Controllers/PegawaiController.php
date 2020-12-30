@@ -21,7 +21,6 @@ class PegawaiController extends Controller
     {
         $pegawais = Pegawai::all();
         $lastID = Pegawai::getLastID();
-  
         return view('pegawai',["lastID"=>$lastID], compact('pegawais'));
         
     }
@@ -58,6 +57,17 @@ $output.='<tr>'.
 '<td>'.$pegawai->email.'</td>'.
 '<td>
 <div>
+<button type="button" class="btn btn-warning" id="btn-edit-pegawai"
+                             data-toggle="modal" 
+                             data-target="#update"
+                             data-id_pegawai='.$pegawai->id_pegawai.'
+                             data-nama='.$pegawai->nama.'
+                             data-jenis_kelmain='.$pegawai->jenis_kelamin.'
+                             data-no_hp='.$pegawai->no_hp.'
+                             data-jabatan='.$pegawai->jabatan.'
+                             data-alamat='.$pegawai->alamat.'
+                             data-email='.$pegawai->email.'
+                            >Ubah</button>
 <button type="button" class="btn btn-danger" id="btn-delete-pegawai"
 
 data-toggle="modal" 
