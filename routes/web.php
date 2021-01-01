@@ -26,7 +26,7 @@ Route::resource('pegawai', 'PegawaiController');
 Route::resource('absen', 'AbsensiController');
 Route::resource('penggajian', 'PenggajianController');
 //Report
-Route::get('generatePDF','PegawaiController@generatePDF');
+Route::get('generatePDFpeg','PegawaiController@generatePDF');
 Route::get('generatePDF','AbsensiController@generatePDF');
 Route::post('generatePDF','PenggajianController@generatePDF');
 
@@ -44,7 +44,8 @@ Route::post('kelolabaju/emptyAll', 'BajuController@emptyAll');
 Route::post('kelolabaju/restoreAll', 'BajuController@restoreAll');
 Route::post('kelolabaju/restore', 'BajuController@restore');
 Route::post('kelolabaju/forceDelete', 'BajuController@forceDelete');
-
+//report
+Route::get('generatePDFbaj','BajuController@generatePDF');
 
 Route::get('filterPenggajian/{bulan}/{tahun}', 'PenggajianController@getFilterPenggajian');
 

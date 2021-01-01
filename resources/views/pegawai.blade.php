@@ -49,6 +49,7 @@
                   <span aria-hidden="true">&times;</span>
                 </button>
                 <h2 class="modal-title" id="exampleModalLabel">Ubah Pegawai</h2>
+                
               </div>
               <div class="modal-body">
               <form method="post" action="{{action('PegawaiController@update', 'update')}}">
@@ -60,27 +61,43 @@
                       </div>
                       <div class="form-group">
                       <label>Nama</label>
-                        <input type="text" name="nama" class="form-control" id="edit-nama">
+                        <input type="text" name="nama" class="form-control" id="edit-nama" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                       </div>
                       <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <select class="form-control" name="jenis_kelamin" id="edit-jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                          <option value="">--</option>
+                          <option name="Laki-Laki" value="Laki-Laki" id="edit-jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Laki-Laki</option>
+                          <option name="Perempuan" value="Perempuan" id="edit-jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Perempuan</option>                 
+                        </select>
+                      </div>
+                      {{-- <div class="form-group">
                       <label>Jenis Kelamin</label>
-                      <textarea class="form-control" name="jenis_kelamin" id="edit-jenis_kelamin"></textarea>
-                    </div>
+                      <textarea class="form-control" name="jenis_kelamin" id="edit-jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')"></textarea>
+                    </div> --}}
                     <div class="form-group">
                       <label>No HP</label>
-                      <textarea class="form-control" name="no_hp" id="edit-no_hp"></textarea>
+                      <input type="number" class="form-control" name="no_hp" id="edit-no_hp" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                     </div>
                     <div class="form-group">
                       <label>Jabatan</label>
-                      <textarea class="form-control" name="jabatan" id="edit-jabatan"></textarea>
+                      <select class="form-control" name="jabatan" id="edit-jabatan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                        <option value="">--</option>
+                        <option name="jabatan" value="Admin" id="edit-jabatan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Admin</option>
+                        <option name="jabatan" value="Produksi" id="edit-jabatan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Produksi</option>                 
+                      </select>
                     </div>
+                    {{-- <div class="form-group">
+                      <label>Jabatan</label>
+                      <textarea class="form-control" name="jabatan" id="edit-jabatan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')"></textarea>
+                    </div> --}}
                     <div class="form-group">
                       <label>Alamat</label>
-                      <textarea class="form-control" name="alamat" id="edit-alamat"></textarea>
+                      <textarea class="form-control" name="alamat" id="edit-alamat" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')"></textarea>
                     </div>
                     <div class="form-group">
                       <label>Email</label>
-                      <textarea class="form-control" name="email" id="edit-email"></textarea>
+                      <input type="text" class="form-control" name="email" id="edit-email" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                     </div>
               </div>
               <div class="modal-footer">
@@ -93,7 +110,7 @@
         </div>
         <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Pegawai</button>
    
-        <a href="generatePDF" class="btn btn-info" target="_blank">CETAK PDF</a>
+        <a href="generatePDFpeg" class="btn btn-info" target="_blank">CETAK PDF</a>
     
         <form class="form-inline "><br>
           <div class="form-group mx-sm-3 mb-2 ">
@@ -176,7 +193,8 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
-                   <h2 class="modal-title" id="exampleModalLabel">Tambah Pegawai</h2>
+                    <h2 class="modal-title" id="exampleModalLabel">Tambah Pegawai</h2>
+                  
                   </div>
                   <div class="modal-body">
                 
@@ -191,9 +209,13 @@
                             <input type="text" name="nama" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                           </div>
                           <div class="form-group">
-                          <label>Jenis Kelamin</label>
-                          <input type="text" name="jenis_kelamin" class="form-control" required required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
-                        </div>
+                            <label>Jenis Kelamin</label>
+                            <select class="form-control" name="jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                              <option value="">--</option>
+                              <option name="Laki-Laki" value="Laki-Laki" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Laki-Laki</option>
+                              <option name="Perempuan" value="Perempuan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Perempuan</option>                 
+                            </select>
+                          </div>
                         <div class="form-group">
                           <label>No HP</label>
                           <input type="number" name="no_hp" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
@@ -208,7 +230,7 @@
                         </div>
                         <div class="form-group">
                           <label>Alamat</label>
-                          <input type="text" name="alamat" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                          <textarea name="alamat" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')"></textarea>
                         </div>
                         <div class="form-group">
                           <label>Email</label>
@@ -229,10 +251,11 @@
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Hapus Pegawai</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
+                    Hapus Pegawai
                   </div>
                  
                   <div class="modal-body">
@@ -244,7 +267,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                    <button type="submit" class="btn btn-primary">Ya</button>
+                    <button type="submit" class="btn btn-danger">Ya</button>
                   </form>
                   </div>
                 </div>

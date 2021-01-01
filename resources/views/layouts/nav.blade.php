@@ -23,17 +23,20 @@
       
     </div>
   </div>
- 
+  
 <div id="test" class="navbar-default sidebar" role="navigation">
+    
     <div class="sidebar-nav navbar-collapse">
+      
         <ul class="nav" id="side-menu">
                 <div class="input-group custom-search-form">
                 </div>
+               
             <li>
-                <a href="/home"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                <a href="/home"><i class="fa fa-home"></i> Beranda</a>
             </li>
             <li>
-                <a href="#" ><i class="fa fa-table fa-fw"></i> Data Pegawai<span class="fa arrow"></span></a>
+                <a href="#" ><i class="fa fa-group"></i> Data Pegawai<span class="fa arrow"></span></a>
                 <ul  class="nav nav-second-level">
                     <li>
                         <a href="/pegawai">Pegawai</a>
@@ -60,9 +63,9 @@
                     <li>
                         <a href="/kelolabaju">Kelola Baju</a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="buttons.html">Laporan Penjualan Baju</a>
-                    </li>
+                    </li> --}}
                     {{-- <li>
                         <a href="notifications.html">Notifications</a>
                     </li>
@@ -77,9 +80,12 @@
                     </li> --}}
                 </ul>
                 <!-- /.nav-second-level -->
+                
             </li>
+         
             <li>
-                <a href="forms.html"><i class="fa fa-edit fa-fw"></i> Forms</a>
+                
+                <a  style="background-color: #f0f0f0"></i></a>
             </li>
             {{-- <li>
                 <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
@@ -125,10 +131,11 @@
                 <!-- /.nav-second-level -->
             </li> --}}
         </ul>
+        
     </div>
     <!-- /.sidebar-collapse -->
 </div>
-<div  class="modal fade" id="tes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+{{-- <div  class="modal fade" id="tes" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -146,11 +153,14 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
+
+
 <script src="admin/vendor/jquery/jquery.min.js"></script>
 @guest
+
 <script>
-   
+
     $(function () {
         $('#test').children().click(function(){
           alert('Anda harus login');
@@ -173,6 +183,7 @@
                         $(".preloader").fadeOut();
                            })
 </script>
+
 <!-- /.navbar-static-side -->
 </nav>
 

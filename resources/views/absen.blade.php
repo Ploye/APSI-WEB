@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Absensi</h1>
-                <a href="generatePDF" class="btn btn-primary" target="_blank">CETAK PDF</a>
+                <a href="generatePDF" class="btn btn-info" target="_blank">CETAK PDF</a>
               <br>
               <br>
                 <table class="table table-bordered">

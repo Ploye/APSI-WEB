@@ -25,7 +25,7 @@
 <div id="wrapper">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0 ">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -59,9 +59,9 @@
                             @endif
                            
                         @else
-                        <li class="nav-item" >
+                        {{-- <li class="nav-item" >
                             <a class="nav-link"  data-toggle="modal" data-target="#exampleModalreg" href="{{ route('register') }}">{{ __('Register') }}</a>
-                        </li>
+                        </li> --}}
                             <li class="nav-item dropdown">
                                 <button  type="button" class="btn btn-danger" href="{{ route('logout') }}" 
                                 onclick="event.preventDefault();
@@ -85,7 +85,7 @@
                                     </a> --}}
                                 
                                     
-                                </div> --}}
+                                </div> 
                             </li>
                            
                         @endguest

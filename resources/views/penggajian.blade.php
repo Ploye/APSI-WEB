@@ -173,14 +173,14 @@
             extend: 'excel',
             text: window.pdfButtonTrans,
             exportOptions: {
-              columns: [ 0 ,1, 2, 3, 5, 6, 7], // Only name, email and role
+              columns: [ 0 ,1, 2, 3, 5, 6, 7], 
             }
         },
                 {
             extend: 'pdf',
             text: window.pdfButtonTrans,
             exportOptions: {
-              columns: [ 0 ,1, 2, 3, 5, 6, 7], // Only name, email and role
+              columns: [ 0 ,1, 2, 3, 5, 6, 7],
             }
         },
        

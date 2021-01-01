@@ -1,5 +1,3 @@
-        
-
 @extends('layouts.app')
 
 @extends('layouts.nav')
@@ -11,9 +9,9 @@
       <div class="col-lg-12">
               
       </div>
-      <!-- /.col-lg-12 -->
   </div>
         <h1>Data Baju</h1>
+        <hr>
         @if (session('added_success'))
         <div  class="alert alert-danger" role="alert">
             {{session('added_success')}}
@@ -40,6 +38,7 @@
             </div>
             @endif
         <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Data</button>
+        <a href="generatePDFbaj" class="btn btn-info" target="_blank">CETAK PDF</a>
         <br>
         <br>
         <table class="table table-bordered">
@@ -69,10 +68,10 @@
                         <td>{{ $baju->bahan}}</td>
                         <td>{{ $baju->ukuran}}</td>
                         <td>{{ $baju->jenis_baju}}</td>
-                        <td>{{ $baju->harga}}</td>
+                        <td>@currency( $baju->harga)</td>
                         <td>{{ $baju->stok}}</td>
                         <td><div class="btn-group" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-primary" id="btn-edit-baju"
+                            <button type="button" class="btn btn-warning" id="btn-edit-baju"
                              data-toggle="modal" 
                              data-target="#update"
                              data-id_baju="{{$baju->id_baju}}"
@@ -84,7 +83,8 @@
                              data-harga="{{$baju->harga}}"
                              data-stok="{{$baju->stok}}"
                             >Ubah</button>
-                            
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-danger" id="btn-delete-baju"
                             data-toggle="modal" 
                             data-target="#delete"
@@ -96,105 +96,46 @@
               
             </tbody>
         </table>
-
-        <!-- dari sini -->
-        {{-- <hr/>
-        <h1>RecycleBin</h1>
-        <div class="btn-group" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#emptyModal">Empty</button>
-          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#restoreAllModal">Restore All</button>
-        </div>
-        <br>
-        <br>
-        <table class="table table-bordered">
-          <thead  class="text-center">
-              <tr>
-                  <td>No</td>
-                  <td>NIDN</td>
-                  <td>Nama</td>
-                  <td>Status</td>
-                  <td>Keterangan</td>
-                  <td>Aksi</td>
-              </tr>
-          </thead>
-          <tbody class="text-center">
-              @php
-                  $no = 1;   
-              @endphp
-    
-              @foreach ($trash as $del)
-                  <tr>
-                      <td>{{ $no++}}</td>
-                      <td>{{ $del->nidn}}</td>
-                      <td>{{ $del->nama}}</td>
-                      <td>
-                      @if ($del->status == 1)
-                          Aktif
-                      @else
-                          Tidak Aktif
-                      @endif
-                      </td>
-                      <td>{{ $del->keterangan}}</td>
-                      <td><div class="btn-group" role="group" aria-label="Basic example">
-                          <button type="button" class="btn btn-primary" id="btn-restore-dosen"
-                           data-toggle="modal" 
-                           data-target="#restoreModal"
-                           data-nidn="{{$del->nidn}}"
-                          >Restore</button>
-                          <button type="button" class="btn btn-danger" id="btn-force-delete-dosen"
-                          data-toggle="modal" 
-                          data-target="#forceDeleteModal"
-                          data-nidn="{{$del->nidn}}"
-                          >Delete</button>
-                        </div></td>
-                  </tr>
-              @endforeach
-            
-          </tbody>
-      </table>
-    </div> --}}
-    <!-- sampai ini -->
-
     <!-- Modal Insert-->
     <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Tambah Baju</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
+              <h2 class="modal-title" id="exampleModalLabel">Tambah Baju</h2>
             </div>
             <div class="modal-body">
             <form method="post" action="{{action('BajuController@store')}}">
                 @csrf
                     <div class="form-group">
                       <label>Kode Baju</label>
-                      <input type="text" name="kode_baju" class="form-control" required>
+                      <input type="text" name="kode_baju" class="form-control" value="{{$lastID}}" required readonly>
                     </div>
                     <div class="form-group">
                     <label>Nama Baju</label>
-                      <input type="text" name="nama_baju" class="form-control" required>
+                      <input type="text" name="nama_baju" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                     </div>
                     <div class="form-group">
                     <label>Bahan</label>
-                    <input type="text" name="bahan" class="form-control" required>
+                    <input type="text" name="bahan" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                   </div>
                   <div class="form-group">
                     <label>Ukuran</label>
-                    <input type="text" name="ukuran" class="form-control" required>
+                    <input type="text" name="ukuran" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                   </div>
                   <div class="form-group">
                     <label>Jenis Baju</label>
-                    <input type="text" name="jenis_baju" class="form-control" required>
+                    <input type="text" name="jenis_baju" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                   </div>
                   <div class="form-group">
                     <label>Harga</label>
-                    <input type="text" name="harga" class="form-control" required>
+                    <input type="number" name="harga" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                   </div>
                   <div class="form-group">
                     <label>Stok</label>
-                    <input type="text" name="stok" class="form-control" required>
+                    <input type="number" name="stok" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                   </div>
                   <!-- <div class="form-group">
                     <label>Gambar</label>
@@ -202,8 +143,8 @@
                   </div> -->
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-primary">Simpan</button>
             </form>
             </div>
           </div>
@@ -215,51 +156,51 @@
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Ubah Baju</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                      </button>                      
+                      </button>      
+                      <h2 class="modal-title" id="exampleModalLabel">Ubah Baju</h2>               
                     </div>
                     <div class="modal-body">
                     <form method="post" action="{{action('BajuController@update', 'update')}}">
                         @method('PATCH')
                         @csrf
-                    <div class="form-group">
+                    <div class="form-group" hidden>
                       <label>No</label>
                       <input type="text" name="id_baju" class="form-control" id="edit-id_baju" readonly>
                     </div>
                     <div class="form-group">
                       <label>Kode Baju</label>
-                      <input type="text" name="kode_baju" class="form-control" id="edit-kode_baju">
+                      <input type="text" name="kode_baju" class="form-control" id="edit-kode_baju" readonly required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                     </div>
                     <div class="form-group">
                       <label>Nama Baju</label>
-                      <input type="text" name="nama_baju" class="form-control" id="edit-nama_baju">
+                      <input type="text" name="nama_baju" class="form-control" id="edit-nama_baju" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                     </div>
                     <div class="form-group">
                       <label>Bahan</label>
-                      <input type="text" name="bahan" class="form-control" id="edit-bahan">
+                      <input type="text" name="bahan" class="form-control" id="edit-bahan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                   </div>
                   <div class="form-group">
                       <label>Ukuran</label>
-                      <input type="text" name="ukuran" class="form-control" id="edit-ukuran">
+                      <input type="text" name="ukuran" class="form-control" id="edit-ukuran" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                     </div>
                     <div class="form-group">
                       <label>Jenis Baju</label>
-                      <input type="text" name="jenis_baju" class="form-control" id="edit-jenis_baju">
+                      <input type="text" name="jenis_baju" class="form-control" id="edit-jenis_baju" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                     </div>
                     <div class="form-group">
-                      <label>harga</label>
-                      <input type="text" name="harga" class="form-control" id="edit-harga">
+                      <label>Harga</label>
+                      <input type="number" name="harga" class="form-control" id="edit-harga" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                   </div>
                   <div class="form-group">
-                      <label>stok</label>
-                      <input type="text" name="stok" class="form-control" id="edit-stok">
+                      <label>Stok</label>
+                      <input type="number" name="stok" class="form-control" id="edit-stok" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
                   </div>
             </div>
             <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-warning">Update</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                      <button type="submit" class="btn btn-warning">Simpan</button>
                     </form>
                     </div>
                   </div>
@@ -270,12 +211,12 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Delete Baju</h5>
+            <h5 class="modal-title" id="exampleModalLabel"></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
+            <h2 class="modal-title" id="exampleModalLabel">Hapus Baju</h2>
           </div>
-         
           <div class="modal-body">
             <strong>Apakah anda yakin akan menghapus data tersebut? </strong>
           <form method="post" action="{{action('BajuController@destroy', 'delete')}}">
@@ -284,119 +225,13 @@
                     <input type="hidden" name="id_baju" id="delete-id_baju">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+            <button type="submit" class="btn btn-danger">Ya</button>
           </form>
           </div>
         </div>
       </div>
     </div>
-
-      <!-- dari sini -->
-      {{-- <!-- Modal Empty -->
-      <div class="modal fade" id="emptyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Empty Data Dosen</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <strong>Apakah anda yakin akan menghapus seluruh data tersebut? </strong>
-            <form method="post" action="{{action('DosenController@emptyAll')}}">
-                @csrf
-                  
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-danger">Empty</button>
-            </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-       <!-- Modal Restore All -->
-       <div class="modal fade" id="restoreAllModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Restore All Data Dosen</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-           
-            <div class="modal-body">
-              <strong>Apakah anda yakin akan mengembalikan  seluruh data? </strong>
-            <form method="post" action="{{action('DosenController@restoreAll')}}">
-                @csrf
-               
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success">Restore All</button>
-            </form>
-            </div>
-          </div>
-        </div>
-      </div>
-       <!-- Modal Restore -->
-       <div class="modal fade" id="restoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Restore Data Dosen</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-           
-            <div class="modal-body">
-              <strong>Apakah anda yakin akan menegmbalikan data tersebut? </strong>
-            <form method="post" action="{{action('DosenController@restore')}}">
-                @csrf
-                <input type="hidden" name="nidn" id="restore-nidn">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success">Restore</button>
-            </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    
-       <!-- Modal Force Delete -->
-       <div class="modal fade" id="forceDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Hapus Data Dosen</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-           
-            <div class="modal-body">
-              <strong>Apakah anda yakin akan Hapus data tersebut? </strong>
-            <form method="post" action="{{action('DosenController@forceDelete')}}">
-                @csrf
-                <input type="hidden" name="nidn" id="force-delete-nidn">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-success">Delete</button>
-            </form>
-            </div>
-          </div>
-        </div>
-      </div> --}} <!-- sampai sini -->
-
-        {{-- JS DOM --}}
-        {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
         <script>
             $(document).on('click','#btn-edit-baju',function(){
                 let id_baju = $(this).data('id_baju');

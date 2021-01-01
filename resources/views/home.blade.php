@@ -1,13 +1,15 @@
+
 @extends('layouts.app')
 
 @extends('layouts.nav')
 @section('content')
-
     <div id="page-wrapper">
         
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Naon didiena bingung ey</h1>
+                <br>
+                <center><img class="wp-image-566 aligncenter" src="https://sablondigitall.com/wp-content/uploads/2019/01/logo-click-300x148.png" alt="" width="134" height="66" srcset="https://sablondigitall.com/wp-content/uploads/2019/01/logo-click-300x148.png 300w, https://sablondigitall.com/wp-content/uploads/2019/01/logo-click.png 437w" sizes="(max-width: 134px) 100vw, 134px"></center>
+                <h1 class="page-header" style="text-align: center">APSIP3 & APSISABLON</h1>
                
                     @error('email')
                     <div class="alert alert-danger" role="alert">
@@ -25,98 +27,33 @@
             </div>
             <!-- /.col-lg-12 -->
         </div>
-        <!-- /.row -->
-        {{-- <div class="row">
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-comments fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">6</div>
-                                <div>Pegawai di sini</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="/pegawai">
-                        <div class="panel-footer">
-                            <span class="pull-left">Lihat Data</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-green">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-tasks fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">12</div>
-                                <div>New Tasks!</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-yellow">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-shopping-cart fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">124</div>
-                                <div>New Orders!</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="panel panel-red">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xs-3">
-                                <i class="fa fa-support fa-5x"></i>
-                            </div>
-                            <div class="col-xs-9 text-right">
-                                <div class="huge">13</div>
-                                <div>Support Tickets!</div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="#">
-                        <div class="panel-footer">
-                            <span class="pull-left">View Details</span>
-                            <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                            <div class="clearfix"></div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div> --}}
-        
+        <div class="entry-content">
+    
+    {{-- <p><strong style="color: #2392C9; line-height: 1.5;">SEJARAH</strong></p>
+    <p><strong style="color: #99CC52">click design house</strong> lahir pada tanggal 12 Januari 2017. Awal mulanya karena melihat peluang atas kebutuhan masyarakat terhadap kaos satuan, couple dan kaos komunitas. oleh karena itu click hadir sebagai pemenuh kebutuhan masyarakat terhadap sablon kaos tersebut, dimana dalam saetiap pengerjaannya tidak harus menunggu lama. Kami ingin memberikan solusi dan pelayanan yang optimal terhadap segala aspek, baik produksi&nbsp; dan hasil setiap karyanya serta ingin memberikan pelayanan yang cepat tanpa menunggu berhari hari, dari&nbsp; situ lah kami lahir untuk memberikan inovasi yang terbaik.</p>
+     --}}
+    <p><strong style="line-height: 1.5; color: #2392C9;">Anggota APSI : <b>APSIP3</b> (Sistem Penggajian dan Pengelolaan Pegawai)</strong></p>
+    <ul>
+    <li><strong> Ketua (PM) : AlvinLie</strong> </li>
+    <li><strong> Analis : M Ridho Zulfikri</strong> </li>
+    <li><strong> Programmer : M Musa Musthofa</strong> </li>
+    <li><strong> Desainer : Lingga Firdaus</strong> </li>
+    <li><strong> Dokumentasi : Alma Hana Katherina</strong> </li>
+    </ul>
+    <p><strong style="line-height: 1.5; color: #2392C9;">Anggota APSI : <b>APSISABLON</b> (Penjualan Baju dan Pemesanan Sablon)</strong></p>
+    <ul>
+    <li><strong> Ketua (PM) : M Bayu Misbahudin</strong> </li>
+    <li><strong> Analis : Mochamad Fauqi Alsyiari Hakim </strong> </li>
+    <li><strong> Programmer : Saidina Husen</strong> </li>
+    <li><strong> Desainer : M Asipa Zaenal Arifin</strong> </li>
+    <li><strong> Dokumentasi : M Bayu Misbahudin</strong> </li>
+    </ul>
+    <hr>
+    </div>
+    <footer style="text-align: right">
+            <a style="text-align: right" href="https://github.com/Ploye/APSI-WEB" rel="nofollow">©2020 All Rights Reserved</a><span class="sep"> | </span>APSIP3 - APSISABLON		</div>
+    </footer>
+       
 <!-- jQuery -->
 <script src="admin/vendor/jquery/jquery.min.js"></script>
 
@@ -134,9 +71,11 @@
 <!-- Custom Theme JavaScript -->
 <script src="admin/dist/js/sb-admin-2.js"></script>
 <script>
+
     $(document).ready(function(){
                         $(".preloader").fadeOut();
                            })
+                           
 </script>
 </body>
     
