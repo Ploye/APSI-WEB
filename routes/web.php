@@ -17,7 +17,20 @@ Route::get('/', function () {
     return view('home');
 });
 Route::get('/pegawai', 'PegawaiController@index');
+Route::get('search','PegawaiController@search');
 Route::get('/kelolabaju', 'BajuController@index');
+Route::get('/absen', 'AbsensiController@index');
+Route::get('/penggajian', 'PenggajianController@index');
+Route::get('changeStatus', 'AbsensiController@changeStatus');
+Route::resource('pegawai', 'PegawaiController');
+Route::resource('absen', 'AbsensiController');
+Route::resource('penggajian', 'PenggajianController');
+//Report
+Route::get('generatePDFpeg','PegawaiController@generatePDF');
+Route::get('generatePDF','AbsensiController@generatePDF');
+Route::post('generatePDF','PenggajianController@generatePDF');
+
+
 // Route::get('/admin', 'BlogController@admin');
 
 //husen
@@ -31,13 +44,16 @@ Route::post('kelolabaju/emptyAll', 'BajuController@emptyAll');
 Route::post('kelolabaju/restoreAll', 'BajuController@restoreAll');
 Route::post('kelolabaju/restore', 'BajuController@restore');
 Route::post('kelolabaju/forceDelete', 'BajuController@forceDelete');
+//report
+Route::get('generatePDFbaj','BajuController@generatePDF');
 
-//musa
-Route::resource('pegawai', 'PegawaiController');
-Route::post('pegawai/emptyAll', 'PegawaiController@emptyAll');
-Route::post('pegawai/restoreAll', 'PegawaiController@restoreAll');
-Route::post('pegawai/restore', 'PegawaiController@restore');
-Route::post('pegawai/forceDelete', 'PegawaiController@forceDelete');
+Route::get('filterPenggajian/{bulan}/{tahun}', 'PenggajianController@getFilterPenggajian');
+
+
+// Route::post('pegawai/emptyAll', 'PegawaiController@emptyAll');
+// Route::post('pegawai/restoreAll', 'PegawaiController@restoreAll');
+// Route::post('pegawai/restore', 'PegawaiController@restore');
+// Route::post('pegawai/forceDelete', 'PegawaiController@forceDelete');
 
 
 Auth::routes();

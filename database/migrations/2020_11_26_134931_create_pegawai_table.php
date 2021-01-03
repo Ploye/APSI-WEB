@@ -22,7 +22,7 @@ class CreatePegawaiTable extends Migration
             $table->char('alamat', 35);
             $table->char('email', 20);
             $table->timestamps();
-            $table->softDeletes();
+            // $table->softDeletes();
 
             // $table->foreign('id_pegawai')
             // ->references('id_pegawai')

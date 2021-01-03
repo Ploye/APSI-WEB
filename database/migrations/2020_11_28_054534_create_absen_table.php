@@ -14,8 +14,7 @@ class CreateAbsenTable extends Migration
     public function up()
     {
         Schema::create('absen', function (Blueprint $table) {
-            $table->increments('id');
-            $table->char('id_absen', 10);
+            $table->char('id_absen', 10)->primary();
             $table->char('nama', 25);
             $table->char('jabatan', 10);
             $table->char('tanggal', 10);
@@ -27,6 +26,9 @@ class CreateAbsenTable extends Migration
             ->references('id_pegawai')
             ->on('pegawai')
             ->onUpdate('cascade');
+          
+
+            
         });
     }
 

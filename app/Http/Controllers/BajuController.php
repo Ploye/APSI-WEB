@@ -4,24 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Baju;
-
+use DB;
+use PDF;
 class BajuController extends Controller
 {
     public function index()
 	{
 		$baju = Baju::all();
-        $trash = Baju::onlyTrashed()->get();
-        return view('kelolabaju', compact('baju','trash'));
+        $lastID = Baju::getLastID();
+        return view('kelolabaju',["lastID"=>$lastID], compact('baju'));
 	}
-
-    // public function kelolabaju()
-    // {
-    // 	// $baju = \App\Baju::all();
-    // 	// return view('kelolabaju',['baju' => $baju]);
-    // 	$baju = Baju::all();
-    //     $trash = Baju::onlyTrashed()->get();
-    //     return view('kelolabaju', compact('baju','trash'));
-    // }
 
     public function store(Request $request)
     {
@@ -39,21 +31,21 @@ class BajuController extends Controller
         return redirect('kelolabaju')->with('added_success', 'Data Berhasil ditambahkan');
     }
 
-    // public function destroy(Request $request,$id)
-    // {
-    //     $baju = Baju::where('id_baju', $request->get('id_baju'))
-    //     ->delete();
-
-    //     return redirect('kelolabaju')->with('deleted_success', 'Data berhasil dihapus');
-    // }
-
-    //
-
     public function show($id)
     {
         $baju = Baju::getBaju($id);
 
         return response()->json($baju);
+    }
+    public function generatePDF()
+
+    {
+        // $data = ['title' => 'Welcome to belajarphp.net'];
+        $baju= Baju::all();
+        $pdf = PDF::loadView('laporanbaju',compact('baju'));
+        return $pdf->download('laporan-baju-pdf.pdf');
+        // return view('laporanpegawai', compact('pegawais'));
+
     }
 
     /**
@@ -103,29 +95,5 @@ class BajuController extends Controller
 
         return redirect('kelolabaju')->with('deleted_success', 'Data berhasil dihapus');
     }
-    public function emptyAll(){
-        Baju::onlyTrashed()
-            ->forceDelete();
-        return redirect('kelolabaju')->with('empty_success', 'Semua Data berhasil dihapus');
-    }
-
-    public function restoreAll(){
-        Baju::onlyTrashed()
-            ->restore();
-         return redirect('kelolabaju')->with('restore_all_success', 'Semua Data berhasil dikembalikan');
-    }
-    
-    public function restore(Request $request){
-        Baju::onlyTrashed()
-            ->where('id_baju', $request->get('id_baju'))
-            ->restore();
-        return redirect('kelolabaju')->with('force_delete_success', 'Data berhasil dikembalikan');
-    }
-
-    public function forceDelete(Request $request){
-        Baju::onlyTrashed()
-        ->where('id_baju', $request->get('id_baju'))
-        ->forceDelete();
-    return redirect('kelolabaju')->with('force_delete_success', 'Data berhasil dikembalikan');
-    }
+   
 }

@@ -1,15 +1,18 @@
 @extends('layouts.app')
-
 @extends('layouts.nav')
 @section('content')
-
+<style>
+  th{
+    text-align: center;
+  }
+</style>
     <div id="page-wrapper">
-        
+      <meta name="_token" content="{{ csrf_token() }}">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Data Pegawai</h1>
                 @if (session('added_success'))
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                <div class="alert alert-success" role="alert">
                     {{session('added_success')}}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -18,7 +21,7 @@
                   @endif
             
                   @if (session('updated_success'))
-                  <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <div class="alert alert-success" role="alert">
                       {{session('updated_success')}}
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -26,253 +29,233 @@
                     </div>
                     @endif
                     @if (session('deleted_success'))
-                  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                  <div class="alert alert-danger" role="alert">
                       {{session('deleted_success')}}
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
                     @endif
-                <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Data</button>
-                <br>
-                <br>
-                <table class="table table-bordered">
-                    <thead  class="text-center">
-                        <tr>
-                            <td>No</td>
-                            <td>ID Pegawai</td>
-                            <td>Nama Pegawai</td>
-                            <td>Jenis Kelamin</td>
-                            <td>No HP</td>
-                            <td>Jabatan</td>
-                            <td>Alamat</td>
-                            <td>Email</td>
-                            <td>Opsi</td>
-                        </tr>
-                    </thead>
-                    <tbody class="text-center">
-                        @php
-                            $no = 1;   
-                        @endphp
-            
-                        @foreach ($pegawais as $pegawai)
-                            <tr>
-                                <td>{{ $no++}}</td>
-                                <td>{{ $pegawai->id_pegawai}}</td>
-                                <td>{{ $pegawai->nama}}</td>
-                                <td>{{ $pegawai->jenis_kelamin}}</td>
-                                <td>{{ $pegawai->no_hp}}</td>
-                                <td>{{ $pegawai->jabatan}}</td>
-                                <td>{{ $pegawai->alamat}}</td>
-                                <td>{{ $pegawai->email}}</td>
-                                {{-- <td>
-                                @if ($dosen->status == 1)
-                                    Aktif
-                                @else
-                                    Tidak Aktif
-                                @endif
-                                </td> --}}
-                                {{-- <td>{{ $dosen->keterangan}}</td> --}}
-                                <td><div class="btn-group" role="group" aria-label="Basic example">
-                                     <button type="button" class="btn btn-primary" id="btn-edit-pegawai"
-                                     data-toggle="modal" 
-                                     data-target="#update"
-                                     data-id_pegawai="{{$pegawai->id_pegawai}}"
-                                     data-nama="{{$pegawai->nama}}"
-                                     data-jenis_kelmain="{{$pegawai->jenis_kelamin}}"
-                                     data-no_hp="{{$pegawai->no_hp}}"
-                                     data-jabatan="{{$pegawai->jabatan}}"
-                                     data-alamat="{{$pegawai->alamat}}"
-                                     data-email="{{$pegawai->email}}"
-                                    >Ubah</button>
-                                    
-                                    <button type="button" class="btn btn-danger" id="btn-delete-pegawai"
-            
-                                    data-toggle="modal" 
-                                    data-target="#delete"
-                                    data-id_pegawai="{{$pegawai->id_pegawai}}"
-                                    
-                                    >Hapus</button>
-                                  </div></td>
-                            </tr>
-                        @endforeach
-                      
-                    </tbody>
-                </table>
-                {{-- <hr/>
-                <h1>RecycleBin</h1>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                  <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#emptyModal">Empty</button>
-                  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#restoreAllModal">Restore All</button>
-                </div>
-                <br>
-                <br>
-                <table class="table table-bordered">
-                  <thead  class="text-center">
-                      <tr>
-                        <td>No</td>
-                        <td>ID Pegawai</td>
-                        <td>Nama Pegawai</td>
-                        <td>Jenis Kelamin</td>
-                        <td>No HP</td>
-                        <td>Jabatan</td>
-                        <td>Alamat</td>
-                        <td>Email</td>
-                        <td>Opsi</td>
-                      </tr>
+                  
+              
+            </div>
+        </div>
+         <!-- Modal UPDATE-->
+         <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="modal-title" id="exampleModalLabel">Ubah Pegawai</h2>
+                
+              </div>
+              <div class="modal-body">
+              <form method="post" action="{{action('PegawaiController@update', 'update')}}">
+                  @method('PATCH')
+                  @csrf
+                      <div class="form-group">
+                        <label>ID Pegawai</label>
+                        <input type="text" name="id_pegawai" class="form-control" id="edit-id_pegawai" readonly>
+                      </div>
+                      <div class="form-group">
+                      <label>Nama</label>
+                        <input type="text" name="nama" class="form-control" id="edit-nama" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                      </div>
+                      <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <select class="form-control" name="jenis_kelamin" id="edit-jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                          <option value="">--</option>
+                          <option name="Laki-Laki" value="Laki-Laki" id="edit-jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Laki-Laki</option>
+                          <option name="Perempuan" value="Perempuan" id="edit-jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Perempuan</option>                 
+                        </select>
+                      </div>
+                      {{-- <div class="form-group">
+                      <label>Jenis Kelamin</label>
+                      <textarea class="form-control" name="jenis_kelamin" id="edit-jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')"></textarea>
+                    </div> --}}
+                    <div class="form-group">
+                      <label>No HP</label>
+                      <input type="number" class="form-control" name="no_hp" id="edit-no_hp" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                    </div>
+                    <div class="form-group">
+                      <label>Jabatan</label>
+                      <select class="form-control" name="jabatan" id="edit-jabatan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                        <option value="">--</option>
+                        <option name="jabatan" value="Admin" id="edit-jabatan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Admin</option>
+                        <option name="jabatan" value="Produksi" id="edit-jabatan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Produksi</option>                 
+                      </select>
+                    </div>
+                    {{-- <div class="form-group">
+                      <label>Jabatan</label>
+                      <textarea class="form-control" name="jabatan" id="edit-jabatan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')"></textarea>
+                    </div> --}}
+                    <div class="form-group">
+                      <label>Alamat</label>
+                      <textarea class="form-control" name="alamat" id="edit-alamat" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')"></textarea>
+                    </div>
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input type="text" class="form-control" name="email" id="edit-email" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                    </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-warning">Perbarui</button>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#insertModal">Tambah Pegawai</button>
+   
+        <a href="generatePDFpeg" class="btn btn-info" target="_blank">CETAK PDF</a>
+    
+        <form class="form-inline "><br>
+          <div class="form-group mx-sm-3 mb-2 ">
+            <input type="text" class="form-control" id="search" name="search" placeholder="Cari"></input>
+          </div>
+        </form>
+
+                  <table class="table table-bordered text-center">
+                  <thead>
+                  <tr>
+                  <th>No</th>
+                  <th>ID</th>
+                  <th>Nama Pegawai</th>
+                  <th>Jenis Kelamin</th>
+                  <th>No HP</th>
+                  <th>Jabatan</th>
+                  <th>Alamat</th>
+                  <th>Email</th>
+                  <th>Opsi</th>
+                  </tr>
                   </thead>
-                  <tbody class="text-center">
-                      @php
-                          $no = 1;   
-                      @endphp
-            
-                      @foreach ($trash as $del)
-                          <tr>
-                              <td>{{ $no++}}</td>
-                                <td>{{ $del->id_pegawai}}</td>
-                                <td>{{ $del->nama}}</td>
-                                <td>{{ $del->jenis_kelamin}}</td>
-                                <td>{{ $del->no_hp}}</td>
-                                <td>{{ $del->jabatan}}</td>
-                                <td>{{ $del->alamat}}</td>
-                                <td>{{ $del->email}}</td> --}}
-                              {{-- <td>
-                              @if ($del->status == 1)
-                                  Aktif
-                              @else
-                                  Tidak Aktif
-                              @endif
-                              </td> --}}
-                              {{-- <td>{{ $del->keterangan}}</td> --}}
-                              {{-- <td><div class="btn-group" role="group" aria-label="Basic example">
-                                  <button type="button" class="btn btn-primary" id="btn-restore-pegawai"
-                                   data-toggle="modal" 
-                                   data-target="#restoreModal"
-                                   data-id_pegawai=""="{{$del->id_pegawai}}"
-                                  >Restore</button>
-                                  <button type="button" class="btn btn-danger" id="btn-force-delete-pegawai"
-                                  data-toggle="modal" 
-                                  data-target="#forceDeleteModal"
-                                  data-id_pegawai="{{$del->id_pegawai}}"
-                                  >Delete</button>
-                                </div></td>
-                          </tr>
-                      @endforeach
-                    
+              
+                  <tbody>
+                    @php
+                    $no = 1;   
+                @endphp
+    
+                @foreach ($pegawais as $pegawai)
+                    <tr>
+                        <td>{{ $no++}}</td>
+                        <td>{{ $pegawai->id_pegawai}}</td>
+                        <td>{{ $pegawai->nama}}</td>
+                        <td>{{ $pegawai->jenis_kelamin}}</td>
+                        <td>{{ $pegawai->no_hp}}</td>
+                        <td>{{ $pegawai->jabatan}}</td>
+                        <td>{{ $pegawai->alamat}}</td>
+                        <td>{{ $pegawai->email}}</td>
+                      
+                        <td><div class="btn-group" role="group" aria-label="Basic example">
+                             <button type="button" class="btn btn-warning" id="btn-edit-pegawai"
+                             data-toggle="modal" 
+                             data-target="#update"
+                             data-id_pegawai="{{$pegawai->id_pegawai}}"
+                             data-nama="{{$pegawai->nama}}"
+                             data-jenis_kelmain="{{$pegawai->jenis_kelamin}}"
+                             data-no_hp="{{$pegawai->no_hp}}"
+                             data-jabatan="{{$pegawai->jabatan}}"
+                             data-alamat="{{$pegawai->alamat}}"
+                             data-email="{{$pegawai->email}}"
+                            >Ubah</button>
+                           </div>
+                           <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-danger" id="btn-delete-pegawai"
+    
+                            data-toggle="modal" 
+                            data-target="#delete"
+                            data-id_pegawai="{{$pegawai->id_pegawai}}"
+                            
+                            >Hapus</button>
+                            {{-- <button type="button" class="btn btn-primary" id="btn-edit-pegawai"
+                          
+                            >Absen</button> --}}
+                          </div>
+                          </td>
+                    </tr>
+                @endforeach
                   </tbody>
-              </table>
-            </div> --}}
-            <!-- Modal Insert-->
+                  </table>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                </div>
+                  
+                  <!-- Modal Insert-->
             <div class="modal fade" id="insertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                     <h2 class="modal-title" id="exampleModalLabel">Tambah Pegawai</h2>
-                    </div>
-                    <div class="modal-body">
-                    <form method="post" action="{{action('PegawaiController@store')}}">
-                        @csrf
-                            <div class="form-group">
-                              <label>ID Pegawai</label>
-                              <input type="text" name="id_pegawai" class="form-control" required>
-                            </div>
-                            <div class="form-group">
-                            <label>Nama</label>
-                              <input type="text" name="nama" class="form-control" required>
-                            </div>
-                            <div class="form-group">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2 class="modal-title" id="exampleModalLabel">Tambah Pegawai</h2>
+                  
+                  </div>
+                  <div class="modal-body">
+                
+                  <form method="post" action="{{action('PegawaiController@store')}}">
+                      @csrf
+                          <div class="form-group">
+                            <label>ID Pegawai</label>
+                          <input type="text" name="id_pegawai" class="form-control" value="{{ $lastID }}" readonly>
+                          </div>
+                          <div class="form-group">
+                          <label>Nama</label>
+                            <input type="text" name="nama" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                          </div>
+                          <div class="form-group">
                             <label>Jenis Kelamin</label>
-                            <input type="text" name="jenis_kelamin" class="form-control" required>
+                            <select class="form-control" name="jenis_kelamin" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                              <option value="">--</option>
+                              <option name="Laki-Laki" value="Laki-Laki" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Laki-Laki</option>
+                              <option name="Perempuan" value="Perempuan" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">Perempuan</option>                 
+                            </select>
                           </div>
-                          <div class="form-group">
-                            <label>No HP</label>
-                            <input type="text" name="no_hp" class="form-control" required>
-                          </div>
-                          <div class="form-group">
-                            <label>Jabatan</label>
-                            <input type="text" name="jabatan" class="form-control" required>
-                          </div>
-                          <div class="form-group">
-                            <label>Alamat</label>
-                            <input type="text" name="alamat" class="form-control" required>
-                          </div>
-                          <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" name="email" class="form-control" required>
-                          </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                    </div>
+                        <div class="form-group">
+                          <label>No HP</label>
+                          <input type="number" name="no_hp" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')">
+                        </div>
+                        <div class="form-group">
+                          <label>Jabatan</label>
+                          <select class="form-control" name="jabatan">
+                            <option value="">--</option>
+                            <option name="jabatan" value="Admin">Admin</option>
+                            <option name="jabatan" value="Produksi">Produksi</option>                 
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label>Alamat</label>
+                          <textarea name="alamat" class="form-control" required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <label>Email</label>
+                          <input type="email" name="email" class="form-control" required oninvalid="this.setCustomValidity('Harap isi dengan email yang benar')" oninput="setCustomValidity('')">
+                        </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                  </form>
                   </div>
                 </div>
               </div>
+            </div>
             
-              <!-- Modal UPDATE-->
-            <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      <h2 class="modal-title" id="exampleModalLabel">Ubah Pegawai</h2>
-                    </div>
-                    <div class="modal-body">
-                    <form method="post" action="{{action('PegawaiController@update', 'update')}}">
-                        @method('PATCH')
-                        @csrf
-                            <div class="form-group">
-                              <label>ID Pegawai</label>
-                              <input type="text" name="id_pegawai" class="form-control" id="edit-id_pegawai" readonly>
-                            </div>
-                            <div class="form-group">
-                            <label>Nama</label>
-                              <input type="text" name="nama" class="form-control" id="edit-nama">
-                            </div>
-                            <div class="form-group">
-                            <label>Jenis Kelamin</label>
-                            <textarea class="form-control" name="jenis_kelamin" id="edit-jenis_kelamin"></textarea>
-                          </div>
-                          <div class="form-group">
-                            <label>No HP</label>
-                            <textarea class="form-control" name="no_hp" id="edit-no_hp"></textarea>
-                          </div>
-                          <div class="form-group">
-                            <label>Jabatan</label>
-                            <textarea class="form-control" name="jabatan" id="edit-jabatan"></textarea>
-                          </div>
-                          <div class="form-group">
-                            <label>Alamat</label>
-                            <textarea class="form-control" name="alamat" id="edit-alamat"></textarea>
-                          </div>
-                          <div class="form-group">
-                            <label>Email</label>
-                            <textarea class="form-control" name="email" id="edit-email"></textarea>
-                          </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-warning">Update</button>
-                    </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-               <!-- Modal DELETE -->
+                    <!-- Modal DELETE -->
             <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Delete Pegawai</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
+                    Hapus Pegawai
                   </div>
                  
                   <div class="modal-body">
@@ -280,118 +263,16 @@
                   <form method="post" action="{{action('PegawaiController@destroy', 'delete')}}">
                       @method('DELETE')
                       @csrf
-                            <input type="hidden" name="id_pegawai" id="delete-id_pegawai">
+                            <input type="text" name="id_pegawai" id="delete-id_pegawai" hidden>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                    <button type="submit" class="btn btn-danger">Ya</button>
                   </form>
                   </div>
                 </div>
               </div>
             </div>
-              <!-- Modal Empty -->
-              {{-- <div class="modal fade" id="emptyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Empty Data Pegawai</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <strong>Apakah anda yakin akan menghapus seluruh data tersebut? </strong>
-                    <form method="post" action="{{action('PegawaiController@emptyAll')}}">
-                        @csrf
-                          
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-danger">Empty</button>
-                    </form>
-                    </div>
-                  </div>
-                </div>
-              </div> --}}
-            
-               <!-- Modal Restore All -->
-               {{-- <div class="modal fade" id="restoreAllModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Restore All Data Pegawai</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                   
-                    <div class="modal-body">
-                      <strong>Apakah anda yakin akan mengembalikan  seluruh data? </strong>
-                    <form method="post" action="{{action('PegawaiController@restoreAll')}}">
-                        @csrf
-                       
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-success">Restore All</button>
-                    </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-               <!-- Modal Restore -->
-               <div class="modal fade" id="restoreModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Restore Data Pegawai</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                   
-                    <div class="modal-body">
-                      <strong>Apakah anda yakin akan menegmbalikan data tersebut? </strong>
-                    <form method="post" action="{{action('PegawaiController@restore')}}">
-                        @csrf
-                        <input type="" name="id_pegawai" id="restore-id_pegawai">
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-success">Restore</button>
-                    </form>
-                    </div>
-                  </div>
-                </div>
-              </div> --}}
-            
-               <!-- Modal Force Delete -->
-               {{-- <div class="modal fade" id="forceDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Hapus Data Pegawai</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                   
-                    <div class="modal-body">
-                      <strong>Apakah anda yakin akan Hapus data tersebut? </strong>
-                    <form method="post" action="{{action('PegawaiController@forceDelete')}}">
-                        @csrf
-                        <input type="hidden" name="id_pegawai" id="force-delete-id_pegawai">
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="submit" class="btn btn-success">Delete</button>
-                    </form>
-                    </div>
-                  </div>
-                </div>
-              </div> --}}
-                {{-- JS DOM --}}
       
 <!-- jQuery -->
 <script src="admin/vendor/jquery/jquery.min.js"></script>
@@ -417,7 +298,7 @@
                         // let keterangan = $(this).data('keterangan');
                         // let status = $(this).data('status');
             
-                        // $('#edit-nidn').val(nidn);
+                        // $('#edit-id_pegawai').val(id_pegawai);
                         // $('#edit-nama').val(nama);
                         // $('#edit-keterangan').text(keterangan);
                         
@@ -457,18 +338,37 @@
             
                       }); 
             
-                      $(document).on('click','#btn-restore-pegawai',function(){
-                        let id_pegawai = $(this).data('id_pegawai');
-                        $('#restore-id_pegawai').val(id_pegawai);
+                    //   $(document).on('click','#btn-restore-pegawai',function(){
+                    //     let id_pegawai = $(this).data('id_pegawai');
+                    //     $('#restore-id_pegawai').val(id_pegawai);
             
-                      });
+                    //   });
             
-                      $(document).on('click','#btn-force-delete-pegawai',function(){
-                        let id_pegawai = $(this).data('id_pegawai');
-                        $('#force-delete-id_pegawai').val(id_pegawai);
+                    //   $(document).on('click','#btn-force-delete-pegawai',function(){
+                    //     let id_pegawai = $(this).data('id_pegawai');
+                    //     $('#force-delete-id_pegawai').val(id_pegawai);
             
-                      });
+                    //   });
+
+                      
                 </script>
+  <script type="text/javascript">
+    $('#search').on('keyup',function(){
+    $value=$(this).val();
+    $.ajax({
+    type : 'get',
+    url : '{{URL::to('search')}}',
+    data:{'search':$value},
+    success:function(data){
+    $('tbody').html(data);
+    }
+    });
+    })
+    </script>
+    <script type="text/javascript">
+    $.ajaxSetup({ headers: { 'csrftoken' : '{{ csrf_token() }}' } });
+    </script>
+
 </body>
 </html>
 @endsection

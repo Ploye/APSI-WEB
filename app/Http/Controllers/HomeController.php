@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Pegawai;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $count = Pegawai::all()->count();
+        
+        return view('home', compact('count'));
+        // return view('home');
     }
 }
