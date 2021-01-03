@@ -70,7 +70,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-
+    //     'customers' => [
+    //         'driver' => 'eloquent',
+    //         'model' => App\Customer::class,
+    //    ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -99,6 +102,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+    //     'customers' => [
+    //         'provider' => 'customers',
+    //         'table' => 'password_resets',
+    //         'expire' => 60,
+    //  ],
+     
     ],
 
     /*

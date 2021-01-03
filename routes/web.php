@@ -31,29 +31,46 @@ Route::get('generatePDF','AbsensiController@generatePDF');
 Route::post('generatePDF','PenggajianController@generatePDF');
 
 
-// Route::get('/admin', 'BlogController@admin');
-
 //husen
+Route::get('{id}/toko', 'TokoController@toko');
 // Route::get('/penjualan','BajuController@index');
 // Route::get('/kelolabaju','BajuController@kelolabaju');
 // Route::post('/kelolabaju','BajuController@store');
 // Route::post('/kelolabaju','BajuController@update');
+//toko
+//Route::post('/siswa/{id}/update','SiswaController@update');
 
-Route::resource('kelolabaju', 'BajuController');
+//cekout
+Route::post('/pesanbaju','PesanbajuController@store');
+Route::post('/beli','LaporanbeliController@store');
+
+
+Route::get('/{id}/{id_baju}/beli', 'TokoController@beli');
+Route::get('{id}/toko', 'TokoController@toko');
+Route::get('/tokov', 'TokoController@tokov');
+Route::get('{id}/pesanbaju', 'TokoController@pesanbaju');
+
+Route::resource('sablon.toko', 'TokoController');
+
+//setelah beli
+Route::get('{id}/toko', 'TokoController@toko');
+
+
+//admin
+Route::get('/kelolabaju', 'BajuController@index');
+Route::resource('kelolabaju', 'BajuController'); 
 Route::post('kelolabaju/emptyAll', 'BajuController@emptyAll');
 Route::post('kelolabaju/restoreAll', 'BajuController@restoreAll');
 Route::post('kelolabaju/restore', 'BajuController@restore');
 Route::post('kelolabaju/forceDelete', 'BajuController@forceDelete');
-//report
-Route::get('generatePDFbaj','BajuController@generatePDF');
+
+//halaman laporan penjualan
+Route::get('/laporanpenjualan', 'LaporanbeliController@index');
+// Route::resource('laporanpenjualan', 'LaporanbeliController');
+
 
 Route::get('filterPenggajian/{bulan}/{tahun}', 'PenggajianController@getFilterPenggajian');
 
-
-// Route::post('pegawai/emptyAll', 'PegawaiController@emptyAll');
-// Route::post('pegawai/restoreAll', 'PegawaiController@restoreAll');
-// Route::post('pegawai/restore', 'PegawaiController@restore');
-// Route::post('pegawai/forceDelete', 'PegawaiController@forceDelete');
 
 
 Auth::routes();

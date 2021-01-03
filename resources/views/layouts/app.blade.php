@@ -110,14 +110,14 @@
                 <div class="form-group row">
                 <label for="email" class="col-md-4 col-form-label text-md-right">&emsp;&emsp;{{ __('Alamat E-Mail') }}</label>               
                 <div class="col-md-7">
-                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>                    
+                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')"  autocomplete="email" autofocus>                    
             </div>
         </div>      
                    
         <div class="form-group row">
             <label for="password" class="col-md-4 col-form-label text-md-right">&emsp;&emsp;{{ __('Password') }}</label>
                 <div class="col-md-7">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">             
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  required oninvalid="this.setCustomValidity('Harap isi bidang ini')" oninput="setCustomValidity('')" autocomplete="current-password">             
                     @error('password')
                     {{-- <script type='text/javascript'>alert('Email atau password salah!');</script> --}}
                         <span class="invalid-feedback" role="alert">
@@ -157,6 +157,7 @@
                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
                     <div class="col-md-7">
                         <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                       
                         @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -10,7 +10,7 @@
                 <br>
                 <center><img class="wp-image-566 aligncenter" src="https://sablondigitall.com/wp-content/uploads/2019/01/logo-click-300x148.png" alt="" width="134" height="66" srcset="https://sablondigitall.com/wp-content/uploads/2019/01/logo-click-300x148.png 300w, https://sablondigitall.com/wp-content/uploads/2019/01/logo-click.png 437w" sizes="(max-width: 134px) 100vw, 134px"></center>
                 <h1 class="page-header" style="text-align: center">APSIP3 & APSISABLON</h1>
-               
+                
                     @error('email')
                     <div class="alert alert-danger" role="alert">
                     {{-- <span class="invalid-feedback" role="alert"> --}}
@@ -23,12 +23,12 @@
                 </div>
                 @enderror
                     
-                  
+                
             </div>
             <!-- /.col-lg-12 -->
         </div>
         <div class="entry-content">
-    
+ 
     {{-- <p><strong style="color: #2392C9; line-height: 1.5;">SEJARAH</strong></p>
     <p><strong style="color: #99CC52">click design house</strong> lahir pada tanggal 12 Januari 2017. Awal mulanya karena melihat peluang atas kebutuhan masyarakat terhadap kaos satuan, couple dan kaos komunitas. oleh karena itu click hadir sebagai pemenuh kebutuhan masyarakat terhadap sablon kaos tersebut, dimana dalam saetiap pengerjaannya tidak harus menunggu lama. Kami ingin memberikan solusi dan pelayanan yang optimal terhadap segala aspek, baik produksi&nbsp; dan hasil setiap karyanya serta ingin memberikan pelayanan yang cepat tanpa menunggu berhari hari, dari&nbsp; situ lah kami lahir untuk memberikan inovasi yang terbaik.</p>
      --}}
@@ -49,10 +49,11 @@
     <li><strong> Dokumentasi : M Bayu Misbahudin</strong> </li>
     </ul>
     <hr>
+    
     </div>
-    <footer style="text-align: right">
+    {{-- <footer style="text-align: right">
             <a style="text-align: right" href="https://github.com/Ploye/APSI-WEB" rel="nofollow">©2020 All Rights Reserved</a><span class="sep"> | </span>APSIP3 - APSISABLON		</div>
-    </footer>
+    </footer> --}}
        
 <!-- jQuery -->
 <script src="admin/vendor/jquery/jquery.min.js"></script>

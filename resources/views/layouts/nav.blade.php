@@ -63,6 +63,13 @@
                     <li>
                         <a href="/kelolabaju">Kelola Baju</a>
                     </li>
+                    <li>
+                        <a href="/laporanpenjualan">Laporan Penjualan Baju</a>
+                    </li>
+                    <li>
+                        <a href="/tokov">Toko</a>
+                    </li>
+                    
                     {{-- <li>
                         <a href="buttons.html">Laporan Penjualan Baju</a>
                     </li> --}}
