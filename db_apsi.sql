@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 25, 2020 at 03:28 AM
+-- Generation Time: Jan 03, 2021 at 05:11 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -41,10 +41,16 @@ CREATE TABLE `absen` (
 --
 
 INSERT INTO `absen` (`id`, `status`, `id_pegawai`, `created_at`, `updated_at`) VALUES
-(25, 1, 'P001', '2020-12-24 15:53:08', '2020-12-25 00:41:47'),
-(31, 1, 'P001', '2020-12-25 01:13:07', '2020-12-25 01:14:22'),
-(32, 0, 'P002', '2020-12-25 01:13:08', '2020-12-25 01:13:08'),
-(33, 0, 'P003', '2020-12-25 01:13:08', '2020-12-25 01:13:08');
+(56, 1, 'P001', '2021-01-01 07:25:13', '2021-01-01 07:36:29'),
+(57, 0, 'P002', '2021-01-01 07:32:10', '2021-01-01 13:03:24'),
+(58, 0, 'P003', '2021-01-01 07:32:10', '2021-01-01 13:03:23'),
+(59, 0, 'P004', '2021-01-01 07:32:10', '2021-01-01 13:03:22'),
+(60, 0, 'P005', '2021-01-01 07:32:10', '2021-01-01 13:03:22'),
+(61, 1, 'P001', '2021-01-03 11:52:37', '2021-01-03 12:54:31'),
+(62, 1, 'P002', '2021-01-03 11:52:37', '2021-01-03 11:52:54'),
+(63, 1, 'P003', '2021-01-03 11:52:37', '2021-01-03 11:52:55'),
+(64, 1, 'P004', '2021-01-03 11:52:37', '2021-01-03 11:52:55'),
+(65, 1, 'P005', '2021-01-03 11:52:37', '2021-01-03 11:52:55');
 
 -- --------------------------------------------------------
 
@@ -57,13 +63,50 @@ CREATE TABLE `baju` (
   `kode_baju` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_baju` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
   `bahan` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ukuran` char(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `warnabaju` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ukuran` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jenis_baju` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
   `harga` bigint(20) UNSIGNED NOT NULL,
   `stok` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `baju`
+--
+
+INSERT INTO `baju` (`id_baju`, `kode_baju`, `nama_baju`, `bahan`, `warnabaju`, `ukuran`, `jenis_baju`, `harga`, `stok`, `avatar`, `created_at`, `updated_at`) VALUES
+(1, 'B001', 'suprim', 'KAIN FLECE', 'SEMUA WARNA ADA', 'L', 'PANJANG PENDEK', 70000, '10', 'order.jpg', '2020-12-31 09:21:44', '2020-12-31 09:40:59'),
+(2, 'PUBG', 'BAJU PUBG', 'KAIN FLECE', 'SEMUA WARNA ADA', 'ALL SIZE', 'PANJANG PENDEK', 70000, '23', 'pubg.png', '2020-12-31 13:14:54', '2020-12-31 13:18:05'),
+(3, 'B02', 'SUPREM', 'KAIN FLECE', 'SEMUA WARNA ADA', 'ALL SIZE', 'TANGAN PANJANG', 60000, '1', 'design.jpg', '2021-01-03 07:49:12', '2021-01-03 08:00:35');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Musa', 'musa7076@gmail.com', NULL, '$2y$10$egaK1ZN5E/nr3Yb9s5iYduXPF9dbEomrd2XI5fxKraygvC6PuTs6e', NULL, '2020-12-06 07:04:47', '2020-12-06 07:04:47'),
+(2, 'husen', 'husen@gmail.com', NULL, '$2y$10$Eu4otd3fbe2hGv7SpJgITee4OWy/aENvRejwWOGtNol01PwjmoK7e', NULL, '2020-12-20 05:35:27', '2020-12-20 05:35:27'),
+(3, 'cika', 'cika@gmail.com', NULL, '$2y$10$CK4U7N4/v2.P9Fd2bIg3q.s7TF.xbeNd.P5PcSvu5mAL.OOMQwOFC', NULL, '2020-12-27 13:13:28', '2020-12-27 13:13:28');
 
 -- --------------------------------------------------------
 
@@ -79,6 +122,85 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `keranjang`
+--
+
+CREATE TABLE `keranjang` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `kode_baju` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_baju` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bahan` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `warnabaju` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ukuran` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jenis_baju` char(25) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `harga` bigint(20) UNSIGNED NOT NULL,
+  `stok` char(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `avatar` varchar(75) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `laporanbeli`
+--
+
+CREATE TABLE `laporanbeli` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `kode_baju` char(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_baju` char(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bahan` char(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `warnabaju` char(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ukuran` char(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `jenis_baju` char(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `harga` bigint(20) UNSIGNED DEFAULT NULL,
+  `qty` int(5) DEFAULT NULL,
+  `bayar` bigint(20) UNSIGNED DEFAULT NULL,
+  `avatar` varchar(75) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_cs` char(35) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_cs` char(35) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat_cs` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `metodeByr` char(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `laporanbeli`
+--
+
+INSERT INTO `laporanbeli` (`id`, `kode_baju`, `nama_baju`, `bahan`, `warnabaju`, `ukuran`, `jenis_baju`, `harga`, `qty`, `bayar`, `avatar`, `nama_cs`, `email_cs`, `alamat_cs`, `metodeByr`, `created_at`, `updated_at`) VALUES
+(5, 'B001', 'suprim', 'KAIN FLECE', 'SEMUA WARNA ADA', 'M', 'TANGAN PANJANG', 70000, 1, 70000, NULL, 'ggdgd', 'saidinahusen12@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DIANTAR KURIR', '2021-01-02 13:14:30', '2021-01-02 13:14:30'),
+(6, 'B001', 'suprim', 'KAIN FLECE', 'SEMUA WARNA ADA', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'order.jpg', 'SAIDINA HUSEN', 'dgd@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DIANTAR KURIR', '2021-01-02 13:19:09', '2021-01-02 13:19:09'),
+(7, 'B001', 'suprim', 'KAIN FLECE', 'SEMUA WARNA ADA', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'order.jpg', 'SAIDINA HUSEN', 'dgd@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DIANTAR KURIR', '2021-01-02 13:25:05', '2021-01-02 13:25:05'),
+(8, 'B001', 'suprim', 'KAIN FLECE', 'HITAM', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'order.jpg', 'SAIDINA HUSEN', 'dgd@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DATANG KE TOKO', '2021-01-02 13:30:08', '2021-01-02 13:30:08'),
+(9, 'B001', 'suprim', 'KAIN FLECE', 'HIJAU', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'order.jpg', 'SAIDINA HUSEN', 'dgd@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DATANG KE TOKO', '2021-01-02 13:31:41', '2021-01-02 13:31:41'),
+(10, 'B001', 'suprim', 'KAIN FLECE', 'HIJAU', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'order.jpg', 'SAIDINA HUSEN', 'dgd@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DATANG KE TOKO', '2021-01-02 13:35:05', '2021-01-02 13:35:05'),
+(11, 'B001', 'suprim', 'KAIN FLECE', 'HIJAU', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'order.jpg', 'SAIDINA HUSEN', 'dgd@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DATANG KE TOKO', '2021-01-02 13:36:05', '2021-01-02 13:36:05'),
+(12, 'B001', 'suprim', 'KAIN FLECE', 'SEMUA WARNA ADA', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'order.jpg', 'ggdgd', 'saidinahusen12@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DIANTAR KURIR', '2021-01-02 13:49:16', '2021-01-02 13:49:16'),
+(13, 'PUBG', 'BAJU PUBG', 'KAIN FLECE', 'SEMUA WARNA ADA', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'pubg.png', 'SAIDINA HUSEN', 'saidinahusen12@gmail.com', 'dsadsa dadasdasd', 'DIANTAR KURIR', '2021-01-02 13:51:35', '2021-01-02 13:51:35'),
+(14, 'B001', 'suprim', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'order.jpg', 'adsda', 'dgd@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DIANTAR KURIR', '2021-01-03 04:30:55', '2021-01-03 04:30:55'),
+(15, 'PUBG', 'BAJU PUBG', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'pubg.png', 'yaniiiii', 'yani@gmail.com', 'bunpas', 'DIANTAR KURIR', '2021-01-03 04:41:00', '2021-01-03 04:41:00'),
+(16, 'PUBG', 'BAJU PUBG', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'pubg.png', 'nanii', 'yani@gmail.com', 'bunpas', 'DIANTAR KURIR', '2021-01-03 04:43:40', '2021-01-03 04:43:40'),
+(17, 'PUBG', 'BAJU PUBG', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'pubg.png', 'nanii', 'yani@gmail.com', 'bunpas', 'DIANTAR KURIR', '2021-01-03 04:44:08', '2021-01-03 04:44:08'),
+(18, 'PUBG', 'BAJU PUBG', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'pubg.png', 'nanii', 'yani@gmail.com', 'bunpasww', 'DIANTAR KURIR', '2021-01-03 04:52:18', '2021-01-03 04:52:18'),
+(19, 'PUBG', 'BAJU PUBG', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, 1, 70000, 'pubg.png', 'nanii', 'yani@gmail.com', 'bunpasww', 'DIANTAR KURIR', '2021-01-03 04:54:36', '2021-01-03 04:54:36'),
+(20, 'B001', 'suprim', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, NULL, 70000, 'order.jpg', 'ggdgd', 'dgd@gmail.com', 'bunpasww', 'DATANG KE TOKO', '2021-01-03 06:00:14', '2021-01-03 06:00:14'),
+(21, 'PO-husen', NULL, 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', NULL, 1, NULL, NULL, 'SAIDINA HUSEN', 'saidinahusen12@gmail.com', 'bunpasww', 'DIANTAR KURIR', '2021-01-03 07:42:58', '2021-01-03 07:42:58'),
+(22, 'PO-husen', NULL, 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', NULL, 1, NULL, '43625434_635db99c-1a21-4e8e-8eff-7e11a6df0008_2048_2048.jpg', 'ggdgd', 'yani@gmail.com', 'dsadsa dadasdasd', 'DIANTAR KURIR', '2021-01-03 07:56:58', '2021-01-03 07:56:58'),
+(23, 'PO-husen', NULL, 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', NULL, 1, NULL, '43625434_635db99c-1a21-4e8e-8eff-7e11a6df0008_2048_2048.jpg', 'SAIDINA HUSEN', 'saidinahusen12@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DIANTAR KURIR', '2021-01-03 08:48:59', '2021-01-03 08:48:59'),
+(24, 'PO-husen', NULL, 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', NULL, 1, NULL, 'HARGA-BAJU-DAN-KAOS-SABLON-TERJANGKAU-KUALITAS-TERBAIK.jpg', 'SAIDINA HUSEN', 'saidinahusen12@gmail.com', 'dsadsa dadasdasd', 'DIANTAR KURIR', '2021-01-03 08:51:34', '2021-01-03 08:51:34'),
+(25, 'PO-husen', NULL, 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', NULL, 1, NULL, 'HARGA-BAJU-DAN-KAOS-SABLON-TERJANGKAU-KUALITAS-TERBAIK.jpg', 'ggdgd', 'saidinahusen12@gmail.com', 'dsadsa dadasdasd', 'DIANTAR KURIR', '2021-01-03 08:54:17', '2021-01-03 08:54:17'),
+(26, 'B02', 'SUPREM', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 60000, 2, 120000, NULL, 'SAIDINA HUSEN', 'saidinahusen12@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DATANG KE TOKO', '2021-01-03 10:12:05', '2021-01-03 10:12:05'),
+(27, 'B001', 'suprim', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, 3, 210000, NULL, 'ggdgd', 'saidinahusen12@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DIANTAR KURIR', '2021-01-03 10:21:53', '2021-01-03 10:21:53'),
+(28, 'B001', 'suprim', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, 4, 280000, NULL, 'ggdgd', 'saidinahusen12@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DIANTAR KURIR', '2021-01-03 10:23:42', '2021-01-03 10:23:42'),
+(29, 'B001', 'suprim', 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', 70000, 4, 280000, 'order.jpg', 'SAIDINA HUSEN', 'saidinahusen12@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DIANTAR KURIR', '2021-01-03 10:30:54', '2021-01-03 10:30:54'),
+(30, 'PO-husen', NULL, 'KAIN FLECE', 'PUTIH', 'M', 'TANGAN PANJANG', NULL, 5, NULL, 'Inilah-Manfaat-Kaos-Sablon-Untuk-Berbagai-Kegiatan.jpg', 'SAIDINA HUSEN', 'saidinahusen12@gmail.com', 'Jl didi prawirakusumah no. 48 Maleber Kp. Jero 002/003', 'DATANG KE TOKO', '2021-01-03 10:32:43', '2021-01-03 10:32:43');
 
 -- --------------------------------------------------------
 
@@ -140,9 +262,11 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id_pegawai`, `nama`, `jenis_kelamin`, `no_hp`, `jabatan`, `alamat`, `email`, `created_at`, `updated_at`) VALUES
-('P001', 'musa', 'Laki', 821231, 'obos', 'dimanawe', 'musa7076@gmail.com', '2020-12-24 15:53:07', '2020-12-24 15:53:07'),
-('P002', 'ujang', 'Laki', 3232, 'babu', 'asdasd', 'admin@gmail.com', '2020-12-24 15:53:24', '2020-12-24 15:53:24'),
-('P003', 'sahawe', 'Laki', 3232, 'dasd', 'adw', 'sass', '2020-12-25 00:34:12', '2020-12-25 00:34:12');
+('P001', 'musa m', 'Laki-Laki', 821231, 'Admin', 'dimanawe', 'musa7076@gmail.com', '2021-01-01 07:22:39', '2021-01-01 13:06:00'),
+('P002', 'Alvin', 'Laki-Laki', 8212312312, 'Produksi', 'teing', 'alvin@gmail.com', '2021-01-01 07:25:49', '2021-01-01 07:25:49'),
+('P003', 'Alma', 'Perempuan', 8212312221, 'Admin', 'diditu', 'alma@gmail.com', '2021-01-01 07:26:16', '2021-01-01 13:05:20'),
+('P004', 'Ridho', 'Laki-Laki', 821231321, 'Admin', 'Cikalog', 'ridho@gmail.com', '2021-01-01 07:26:52', '2021-01-01 07:26:52'),
+('P005', 'Lingga', 'Laki-Laki', 821231999, 'Admin', 'dimanawe', 'lingga@gmail.com', '2021-01-01 07:27:23', '2021-01-01 13:05:30');
 
 -- --------------------------------------------------------
 
@@ -168,9 +292,11 @@ CREATE TABLE `penggajian` (
 --
 
 INSERT INTO `penggajian` (`id`, `gaji_pokok`, `jml_hadir`, `gaji_diterima`, `id_pegawai`, `nama`, `jabatan`, `absen_id`, `created_at`, `updated_at`) VALUES
-(61, 40000, 2, 80000, 'P001', 'musa', 'obos', NULL, '2020-11-26 15:53:08', '2020-12-25 01:14:22'),
-(62, 40000, 0, 0, 'P002', 'ujang', 'babu', NULL, '2020-12-24 15:53:26', '2020-12-24 15:53:42'),
-(63, 40000, 0, NULL, 'P003', 'sahawe', 'dasd', NULL, '2020-12-25 00:34:12', '2020-12-25 00:34:12');
+(66, 40000, 2, 80000, 'P001', 'musa m', 'Admin', NULL, '2021-01-01 07:32:21', '2021-01-03 12:54:31'),
+(67, 40000, 1, 40000, 'P002', 'Alvin', 'Produksi', NULL, '2021-01-01 07:32:21', '2021-01-03 11:52:54'),
+(68, 40000, 1, 40000, 'P003', 'Alma', 'Admin', NULL, '2021-01-01 07:32:22', '2021-01-03 11:52:55'),
+(69, 40000, 1, 40000, 'P004', 'Ridho', 'Admin', NULL, '2021-01-01 07:32:22', '2021-01-03 11:52:55'),
+(70, 40000, 1, 40000, 'P005', 'Lingga', 'Admin', NULL, '2021-01-01 07:32:23', '2021-01-03 11:52:55');
 
 -- --------------------------------------------------------
 
@@ -184,6 +310,7 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `level` int(11) DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -193,9 +320,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Musa', 'musa7076@gmail.com', NULL, '$2y$10$egaK1ZN5E/nr3Yb9s5iYduXPF9dbEomrd2XI5fxKraygvC6PuTs6e', NULL, '2020-12-06 07:04:47', '2020-12-06 07:04:47'),
-(2, 'husen', 'husen@gmail.com', NULL, '$2y$10$Eu4otd3fbe2hGv7SpJgITee4OWy/aENvRejwWOGtNol01PwjmoK7e', NULL, '2020-12-20 05:35:27', '2020-12-20 05:35:27');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `level`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Musa', 'musa7076@gmail.com', NULL, '$2y$10$egaK1ZN5E/nr3Yb9s5iYduXPF9dbEomrd2XI5fxKraygvC6PuTs6e', NULL, NULL, '2020-12-06 07:04:47', '2020-12-06 07:04:47'),
+(2, 'husen', 'husen@gmail.com', NULL, '$2y$10$Eu4otd3fbe2hGv7SpJgITee4OWy/aENvRejwWOGtNol01PwjmoK7e', NULL, NULL, '2020-12-20 05:35:27', '2020-12-20 05:35:27'),
+(3, 'cika', 'cika@gmail.com', NULL, '$2y$10$CK4U7N4/v2.P9Fd2bIg3q.s7TF.xbeNd.P5PcSvu5mAL.OOMQwOFC', NULL, NULL, '2020-12-27 13:13:28', '2020-12-27 13:13:28'),
+(4, 'saha', 'saha@gmail.com', NULL, '$2y$10$qJBqrbVM7HkJbA.MoXmpyONEUWyB01YYtED6fuYDeJq4tZMOuDcDW', NULL, NULL, '2021-01-03 15:41:58', '2021-01-03 15:41:58'),
+(5, 'coba', 'coba@gmail.com', NULL, '$2y$10$GavEUqK.FKHGJi5D7VxRL.U0UlumFuFQVyOTYDMvODRjoK2LF7QDe', NULL, NULL, '2021-01-03 15:52:57', '2021-01-03 15:52:57');
 
 --
 -- Indexes for dumped tables
@@ -215,9 +345,28 @@ ALTER TABLE `baju`
   ADD PRIMARY KEY (`id_baju`);
 
 --
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `keranjang`
+--
+ALTER TABLE `keranjang`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `laporanbeli`
+--
+ALTER TABLE `laporanbeli`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -262,19 +411,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `baju`
 --
 ALTER TABLE `baju`
-  MODIFY `id_baju` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_baju` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `keranjang`
+--
+ALTER TABLE `keranjang`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `laporanbeli`
+--
+ALTER TABLE `laporanbeli`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -286,13 +453,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `penggajian`
 --
 ALTER TABLE `penggajian`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
