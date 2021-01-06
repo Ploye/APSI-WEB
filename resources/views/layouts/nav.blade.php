@@ -66,9 +66,9 @@
                     <li>
                         <a href="/laporanpenjualan">Laporan Penjualan Baju</a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a href="/tokov">Toko</a>
-                    </li>
+                    </li> --}}
                     
                     {{-- <li>
                         <a href="buttons.html">Laporan Penjualan Baju</a>
