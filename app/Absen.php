@@ -31,7 +31,7 @@ class Absen extends Model
     {
         return $this->belongsTo(Pegawai::class,'id_pegawai','id_pegawai');
     }
-
+    //test git
     // public function penggajian()
     // {
     //     return $this->belongsTo(Penggajian::class,'id_pegawai','id_pegawai');
